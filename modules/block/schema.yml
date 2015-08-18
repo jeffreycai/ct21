@@ -1,0 +1,16 @@
+block:
+  pk: id
+  fields:
+    id: INT NOT NULL AUTO_INCREMENT
+    name: VARCHAR(31) NOT NULL UNIQUE
+    content: TEXT
+  form:
+    fields:
+      content:
+        widget: textarea
+        widget_conf:
+          required: 1
+          wysiwyg: 1
+    names:
+      en: Block
+      zh: Content Block
