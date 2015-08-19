@@ -84,33 +84,25 @@ abstract class DBObject {
       // set fields
       $set_clauses = array();
       foreach ($this->getDbFields() as $field => $val) {
+        
         // skip primary keys
-        if (is_array($this->getPrimaryKeyName())) {
-          if (in_array($field, $this->getPrimaryKeyName())) {
-            continue;
-          }
-        } else {
-          if ($field == $this->getPrimaryKeyName()) {
-            continue;
-          }
+        if (in_array($field, $this->getPrimaryKeyName())) {
+          continue;
         }
+
         // --
         $set_clauses[] = "`$field`=" . self::prepare_val_for_sql($val) ;
       }
       $query .= implode(', ', $set_clauses);
       
       // where clause
-      if (is_array($this->getPrimaryKeyName())) {
-        $where = array();
-        foreach ($this->getPrimaryKeyName() as $field) {
-          $val = $this->{'getDfField' . $field}();
-          $where[] = "`$field`=" . self::prepare_val_for_sql($this->{'db_field_' . $field});
-        }
-        $query .= " WHERE " . implode(' AND ', $where);
-      } else {
-        $val = $this->{'db_field_' . $this->getPrimaryKeyName()};
-        $query .= " WHERE " . "`" . $this->getPrimaryKeyName() . "`=" . self::prepare_val_for_sql($val);
+      $where = array();
+      foreach ($this->getPrimaryKeyName() as $field) {
+        $val = $this->{'getDfField' . $field}();
+        $where[] = "`$field`=" . self::prepare_val_for_sql($this->{'db_field_' . $field});
       }
+      $query .= " WHERE " . implode(' AND ', $where);
+
       
       $query .= ";";
     //*-- if not update, create a new record
@@ -132,16 +124,13 @@ abstract class DBObject {
     $this->last_execute_query = $query;
 
     // update auto increase id as primary key
-    if (!$is_update && sizeof($this->primary_key) == 1 && $this->pk_auto_increased) {
-      $id = array_pop($this->primary_key);
-      $this->{"db_field_" . $id} = $mysqli->insert_id;
+    if (!$is_update && sizeof($this->getPrimaryKeyName()) == 1 && $this->pk_auto_increased) {
+      $primary_key = $this->getPrimaryKeyName();
+      $this->{"db_field_" . array_pop($primary_key)} = $mysqli->insert_id;
     }
     
     // update auto increase id, but when it is not primary key
-    if (!$is_update && !in_array('id', $this->primary_key) && $this->pk_auto_increased) {
-      $id = array_pop($this->primary_key);
-      $this->{"db_field_" . $id} = $mysqli->insert_id;
-    }
+    // TODO
     return $result;
   }
   
@@ -155,30 +144,22 @@ abstract class DBObject {
   public function checkExisted() {
     global $mysqli;
 
-    // if primary key is an array, make sure that every field is set, otherwise, it does not exist
-    if (is_array($this->getPrimaryKeyName())) {
-      foreach ($this->getPrimaryKeyName() as $pk_field) {
-        if (!isset($this->{'db_field_' . $pk_field})) {
-          return false;
-        }
-      }
-    // if primary key is a single field, check if it is set, otherwise, it does not exist
-    } else {
-      if (!isset($this->{'db_field_' . $this->getPrimaryKeyName()})) {
+    // make sure that every primary key field is set, otherwise, it does not exist
+    foreach ($this->getPrimaryKeyName() as $pk_field) {
+      if (!isset($this->{'db_field_' . $pk_field})) {
         return false;
       }
     }
+
     
     $query = "SELECT * FROM `" . $this->getTableName() . "` WHERE ";
-    if (is_array($this->getPrimaryKeyName())) {
-      $where_clause = array();
-      foreach ($this->getPrimaryKeyName() as $pk_field) {
-        $where_clause[] = "`$pk_field`=" . self::prepare_val_for_sql($this->{'db_field_' . $pk_field});
-      }
-      $query .= implode(' AND ', $where_clause);
-    } else {
-      $query .= "`" . $this->getPrimaryKeyName() . "`=" . self::prepare_val_for_sql($this->{'db_field_' . $this->getPrimaryKeyName()});
+
+    $where_clause = array();
+    foreach ($this->getPrimaryKeyName() as $pk_field) {
+      $where_clause[] = "`$pk_field`=" . self::prepare_val_for_sql($this->{'db_field_' . $pk_field});
     }
+    $query .= implode(' AND ', $where_clause);
+
     $query .= ";";
 
     $result = $mysqli->query($query);
@@ -211,7 +192,7 @@ abstract class DBObject {
     $query = "DELETE FROM `$this->table_name` WHERE ";
     
     $tokens = array();
-    foreach ($this->primary_key as $key) {
+    foreach ($this->getPrimaryKeyName() as $key) {
       $tokens[] = "`$key`=" . self::prepare_val_for_sql($this->{"getDbField" . ucfirst($key)}());
     }
     $query .= implode(' AND ', $tokens);
@@ -223,7 +204,7 @@ abstract class DBObject {
   public function isNew() {
     $rtn = true;
 
-    foreach ($this->primary_key as $field) {
+    foreach ($this->getPrimaryKeyName() as $field) {
       $val = $this->{"get".self::tableNameToClassName($field)}();
       $rtn &= is_null($val);
     }
