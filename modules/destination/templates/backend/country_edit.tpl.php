@@ -19,19 +19,25 @@
           
         <?php echo Message::renderMessages(); ?>
           
-<form role="form" method="POST" action="<?php echo uri('admin/country/edit/' . $object->getId()) ?>">
+<form class="form-horizontal" role="form" method="POST" action="<?php echo uri('admin/country/edit/' . $object->getId()) ?>">
   
 <div class='form-group'>
-  <label for='name'>name</label>
-  <input value='<?php echo htmlentities(str_replace('\'', '"', ($object->isNew() ? (isset($_POST['name']) ? strip_tags($_POST['name']) : '') : $object->getName()))) ?>' type='text' class='form-control' id='name' name='name' required />
+  <label class='col-sm-2 control-label' for='name'>name <span style="color: rgb(185,2,0); font-weight: bold;">*</span></label>
+  <div class='col-sm-10'>
+    <input value='<?php echo htmlentities(str_replace('\'', '"', ($object->isNew() ? (isset($_POST['name']) ? strip_tags($_POST['name']) : '') : $object->getName()))) ?>' type='text' class='form-control' id='name' name='name' required />
+  </div>
 </div>
+<div class='hr-line-dashed'></div>
   
 <div class='form-group' id='image'>
-  <label>image</label>
-  <textarea name='image' style='display: none;'></textarea>
-  <div class='file-fields'></div>
+  <label class='col-sm-2 control-label'>image <span style="color: rgb(185,2,0); font-weight: bold;">*</span></label>
+  <div class='col-sm-10'>
+    <textarea name='image' style='display: none;'></textarea>
+    <div class='file-fields'></div>
 
+  </div>
 </div>
+<div class='hr-line-dashed'></div>
 
 <?php
   // get json string of prepopulated image links
@@ -197,9 +203,12 @@ tr.html(addImageRow(false, true));
 </script>
   
 <div class='form-group'>
-  <label for='content'>content</label>
-  <textarea class='form-control' rows='5' id='content' name='content' required><?php echo ($object->isNew() ? (isset($_POST['content']) ? htmlentities($_POST['content']) : '') : htmlentities($object->getContent())) ?></textarea>
+  <label class='col-sm-2 control-label' for='content'>content <span style="color: rgb(185,2,0); font-weight: bold;">*</span></label>
+  <div class='col-sm-10'>
+    <textarea class='form-control' rows='5' id='content' name='content' required><?php echo ($object->isNew() ? (isset($_POST['content']) ? htmlentities($_POST['content']) : '') : htmlentities($object->getContent())) ?></textarea>
+  </div>
 </div>
+<div class='hr-line-dashed'></div>
 
 <script type='text/javascript' src='/libraries/ckeditor/ckeditor.js'></script>
 <script type='text/javascript'>CKEDITOR.replace('content');</script>

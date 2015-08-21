@@ -18,6 +18,9 @@ if (isset($custom_modules)) {
       'mail',
       'destination',
       'block',
+      'news',
+      'carousel',
+      'testimonial',
       'menu'
   );
 

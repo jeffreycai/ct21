@@ -24,6 +24,7 @@
                 <th>menu_id</th>
                 <th>parent_id</th>
                 <th>weight</th>
+                <th>display</th>
                 <th>Actions</th>
       </tr>
   </thead>
@@ -36,6 +37,7 @@
             <td><?php echo $object->getMenuId() ?></td>
             <td><?php echo $object->getParentId() ?></td>
             <td><?php echo $object->getWeight() ?></td>
+            <td><?php echo $object->getDisplay() ?></td>
             <td>
         <div class="btn-group">
           <a class="btn btn-default btn-sm" href="<?php echo uri('admin/menu_item/edit/' . $object->getId()); ?>"><i class="fa fa-edit"></i></a>

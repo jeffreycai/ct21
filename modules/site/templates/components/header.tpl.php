@@ -11,18 +11,11 @@
 
         <nav id="main-nav">
           <ul id="menu-main-menu" class="menu">
-<?php foreach (Menu::findByName('主菜单')->getRootMenuItem()->getChildren() as $item): ?>
-            
+<?php foreach (Menu::findByName('主菜单')->getRootItem()->getChildren() as $item): ?>
+            <li class="menu-item">
+              <a href="<?php echo uri($item->getUri()) ?>"><?php echo $item->getName() ?></a>
+            </li>
 <?php endforeach; ?>
-            <li class="menu-item">
-              <a href="<?php echo uri('') ?>">HOME</a>
-            </li>
-            <li class="menu-item">
-              <a href="<?php echo uri('about') ?>">ABOUT US</a>
-            </li>
-            <li class="menu-item">
-              <a href="<?php echo uri('services') ?>">OUR SERVICES</a>
-            </li>
           </ul>
         </nav>
       </div>

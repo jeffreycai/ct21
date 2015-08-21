@@ -19,12 +19,15 @@
           
         <?php echo Message::renderMessages(); ?>
           
-<form role="form" method="POST" action="<?php echo uri('admin/block/edit/' . $object->getId()) ?>">
+<form class="form-horizontal" role="form" method="POST" action="<?php echo uri('admin/block/edit/' . $object->getId()) ?>">
   
 <div class='form-group'>
-  <label for='content'>content</label>
-  <textarea class='form-control' rows='5' id='content' name='content' required><?php echo ($object->isNew() ? (isset($_POST['content']) ? htmlentities($_POST['content']) : '') : htmlentities($object->getContent())) ?></textarea>
+  <label class='col-sm-2 control-label' for='content'>content <span style="color: rgb(185,2,0); font-weight: bold;">*</span></label>
+  <div class='col-sm-10'>
+    <textarea class='form-control' rows='5' id='content' name='content' required><?php echo ($object->isNew() ? (isset($_POST['content']) ? htmlentities($_POST['content']) : '') : htmlentities($object->getContent())) ?></textarea>
+  </div>
 </div>
+<div class='hr-line-dashed'></div>
 
 <script type='text/javascript' src='/libraries/ckeditor/ckeditor.js'></script>
 <script type='text/javascript'>CKEDITOR.replace('content');</script>

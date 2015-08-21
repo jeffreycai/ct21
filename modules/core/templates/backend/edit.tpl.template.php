@@ -20,7 +20,7 @@
           
         [[[ echo Message::renderMessages(); ]]]
           
-<form role="form" method="POST" action="[[[ echo uri('admin/<?php echo $model ?>/edit/' . $object->getId()) ]]]">
+<form class="form-horizontal" role="form" method="POST" action="[[[ echo uri('admin/<?php echo $model ?>/edit/' . $object->getId()) ]]]">
 <?php foreach ($form_fields as $field => $settings): $widget = new $settings['widget_class']($field, $settings['widget_conf']); ?>
   <?php echo $widget->render($module, $model); ?>
 <?php endforeach; ?>

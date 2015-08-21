@@ -13,7 +13,7 @@ class Menu extends BaseMenu {
     global $mysqli;
     $query = 'SELECT * FROM menu WHERE name=' . DBObject::prepare_val_for_sql($name);
     $result = $mysqli->query($query);
-        _debug($query);
+
     if ($result && $b = $result->fetch_object()) {
       $obj = new Menu();
       DBObject::importQueryResultToDbObject($b, $obj);

@@ -7,3 +7,70 @@
 .single .educator-share-links {
   margin-bottom: 0px;
 }
+#msg ul li {
+  margin-bottom: 0;
+}
+.news {
+  position: relative;
+  padding: 20px 0;
+  height: 100px;
+  top: -20px;
+  overflow: hidden;
+  border-bottom: dotted #AAA 1px;
+}
+.news.last {
+  border-bottom: none;
+}
+@media (max-width: 767px) {
+  .news {
+    min-height: 100px;
+    overflow: hidden;
+  }
+}
+.news .left {
+  position: absolute;
+  top: 20px;
+  left: 0;
+}
+.news .left img {
+  width: 100px;
+  height: 100px;
+}
+.news .right {
+  padding-left: 115px;
+}
+.news h3 {
+  margin-bottom: 0;
+  font-size: 1.3em;
+}
+.news p {
+  margin-bottom: 0;
+}
+#video-container {
+  height: 475px;
+}
+#video-container iframe {
+  margin-top: 11%;
+}
+@media (max-width: 1120px) {
+  #video-container iframe {
+    margin-top: 20%;
+  }
+}
+@media (max-width: 960px) {
+  #video-container iframe {
+    margin-top: 33%;
+  }
+}
+@media (max-width: 767px) {
+  #video-container iframe {
+    margin-top: 0;
+  }
+}
+.author-from {
+  color: #AAA;
+  margin-top: 10px;
+  text-align: right;
+  font-size: 0.9em;
+  font-style: italic;
+}

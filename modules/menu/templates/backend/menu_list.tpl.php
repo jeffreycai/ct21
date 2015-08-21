@@ -20,6 +20,7 @@
       <tr role="row">
                 <th>id</th>
                 <th>name</th>
+                <th>root_menu_item_id</th>
                 <th>Actions</th>
       </tr>
   </thead>
@@ -28,6 +29,7 @@
     <tr>
             <td><?php echo $object->getId() ?></td>
             <td><?php echo $object->getName() ?></td>
+            <td><?php echo $object->getRootMenuItemId() ?></td>
             <td>
         <div class="btn-group">
           <a class="btn btn-default btn-sm" href="<?php echo uri('admin/menu/edit/' . $object->getId()); ?>"><i class="fa fa-edit"></i></a>
