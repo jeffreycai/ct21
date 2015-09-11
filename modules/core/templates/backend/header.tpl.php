@@ -52,6 +52,7 @@
   <div role="navigation" class="navbar-default navbar-static-side">
     <div class="sidebar-collapse">
       <ul id="side-menu" class="nav">
+        <!--
         <li class="sidebar-search">
           <div class="input-group custom-search-form">
             <input type="text" placeholder="Search..." class="form-control">
@@ -61,8 +62,8 @@
               </button>
             </span>
           </div>
-          <!-- /input-group -->
         </li>
+        -->
         <li>
           <a href="<?php print_uri('admin/dashboard') ?>"><i class="fa fa-dashboard fa-fw"></i> <?php i18n_echo(array('en' => 'Dashboard', 'zh' => '面板')) ?></a>
         </li>

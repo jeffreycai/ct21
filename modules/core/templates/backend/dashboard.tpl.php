@@ -6,4 +6,7 @@
   </div>
   
     <?php echo Backend::renderDashboard(); ?>
+  <ul id="inner-side-menu" class="nav">
+  <?php echo Backend::renderSideNavRegistry() ?>
+  </ul>
 </div>

@@ -36,23 +36,31 @@ foreach ($settings['routing'] as $route) {
   }
 }
 
-
-// if no route matches, check if matches any page
 if ($settings['i18n']) {
   HTML::redirectToI18nUrl();
 }
 
+// if no route matches, check if matches any page
 global $enabled_modules;
 if (in_array('database', $enabled_modules) && in_array('page', $enabled_modules) && Page::tableExist()) {
   foreach (Page::findAllPublished() as $page) {
-    if ($page->getUri() == $relative_uri) {
-      dispatch('site/' . $page->getController(), array('page' => $page));
+    if ($page->getUri() == trim($relative_uri, " /")) {
+      dispatch($page->getController(), array('page' => $page));
       exit;
     }
   }
 }
 
-dispatch('site/404');
 
+// nothing mataches, 404
+dispatch('site/404');
 exit;
+
+
+
+
+
+
+
+
 

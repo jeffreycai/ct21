@@ -3,6 +3,7 @@
 
 
 // register admin
+/*
 $user = User::getInstance();
 if (is_backend() && $user->isLogin()) {
   Backend::registerSideNav(
@@ -46,3 +47,4 @@ if (is_backend() && $user->isLogin()) {
   '        
   );
 }
+ * */

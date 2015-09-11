@@ -19,6 +19,13 @@ if (isset($_POST['submit'])) {
     $error_flag = true;
   }
   
+  // validation for $summary
+  $summary = isset($_POST["summary"]) ? $_POST["summary"] : null;
+  if (empty($summary)) {
+    Message::register(new Message(Message::DANGER, i18n(array("en" => "summary is required.", "zh" => "请填写summary"))));
+    $error_flag = true;
+  }
+  
   // validation for $content
   $content = isset($_POST["content"]) ? $_POST["content"] : null;
   if (empty($content)) {
@@ -50,6 +57,9 @@ if (isset($_POST['submit'])) {
   
   // proceed for $title
   $object->setTitle($title);
+  
+  // proceed for $summary
+  $object->setSummary($summary);
   
   // proceed for $content
   $object->setContent($content);

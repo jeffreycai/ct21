@@ -5,7 +5,7 @@
     <nav id="footer-nav">
       <ul id="menu-footer-menu" class="menu">
 <?php foreach (Menu::findByName('页脚底部菜单')->getRootItem()->getChildren() as $item): ?>
-        <li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item current_page_item"><a href="<?php echo uri($item->getUri()) ?>"><?php echo $item->getName() ?></a></li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page page_item"><a href="<?php echo uri($item->getUri()) ?>"><?php echo $item->getName() ?></a></li>
 <?php endforeach; ?>
       </ul>
     </nav>

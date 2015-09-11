@@ -51,9 +51,9 @@ if (isset($_FILES)) {
         $watermark = false;
         if ($refill) {
           $bgcolor = $image->allocateColor(0);
-          $image = $image->resize(300, 244, 'inside')->resizeCanvas(300, 244, 'center', 'center', $bgcolor);
+          $image = $image->resize(360, 224, 'inside')->resizeCanvas(360, 224, 'center', 'center', $bgcolor);
         } else {
-          $image = $image->resize(300, 244, 'outside')->resizeCanvas(300, 244, 'center', 'center');
+          $image = $image->resize(360, 224, 'outside')->resizeCanvas(360, 224, 'center', 'center');
         }
 
         if ($watermark) {

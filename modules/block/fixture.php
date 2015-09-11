@@ -40,14 +40,21 @@ Saturday-Sunday: 9AM to 1PM</p>
 ');
   $block->save();
   
-  // ------------ contact
+  // ------------ course search
   $block = new Block();
-  $block->setName('Contact page');
+  $block->setName('Course search');
   $block->setContent('
-<h3>'.$settings['sitename'].'</h3>
-          <p>Our headquarter is located in Sydney CBD with easy access by public transportation. We open Monday to Friday from 9AM to 5PM, Saturday to Sunday from 9AM to 1PM. We are present on all business hours on phone. You can also reach us by email or filling up the contact form below.</p>
+<h2><a href="http://www.globecourse.com/sou.php">Search your course</a></h2>
+                  <p>Search in our advanced course database for the course that suits you the most.</p>
 ');
   $block->save();
   
+  // ------------ youtube video
+  $block = new Block();
+  $block->setName('Youtube video');
+  $block->setContent('
+  <p>https://www.youtube.com/embed/PCm8FLQW8FA</p>
+');
+  $block->save();
   
 }

@@ -1,8 +1,9 @@
 mail:
   # conf for email sending to amdin
   admin:
-    to: jeffreycaizhenyuan@gmail.com
-    from: findloveinsydney@gmail.com
+    to: george@ct21.com.au
+#    to: jeffreycaizhenyuan@gmail.com
+    from: jeffreycaizhenyuan@gmail.com
     mailer: smtp
     SMTPSecure: tls
     host: smtp.mandrillapp.com

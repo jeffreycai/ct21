@@ -12,7 +12,7 @@
         <nav id="main-nav">
           <ul id="menu-main-menu" class="menu">
 <?php foreach (Menu::findByName('主菜单')->getRootItem()->getChildren() as $item): ?>
-            <li class="menu-item">
+            <li class="menu-item <?php echo_link_active_class('/^'.$item->getUri().'$/', get_cur_page_url(), 'current-menu-item') ?>">
               <a href="<?php echo uri($item->getUri()) ?>"><?php echo $item->getName() ?></a>
             </li>
 <?php endforeach; ?>

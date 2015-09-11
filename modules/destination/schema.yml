@@ -24,6 +24,7 @@ country:
         widget_conf:
           required: 1
           wysiwyg: 1
+          wysiwyg_toolbar: standard
     names:
       en: Country
       zh: 留学国家

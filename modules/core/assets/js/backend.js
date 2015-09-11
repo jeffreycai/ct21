@@ -1,6 +1,7 @@
 $(function() {
   /** backend menu effect **/
   $('#side-menu').metisMenu();
+  $('#inner-side-menu').metisMenu();
 
   /** CKEditor initialize **/
   if (typeof CKEDITOR != 'undefined' && $('.ckeditor').length) {

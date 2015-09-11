@@ -1,4 +1,5 @@
 <?php
+
 $html = new HTML();
 
 $html->renderOut('core/backend/html_header', array(

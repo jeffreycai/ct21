@@ -22,6 +22,7 @@ if (!is_writable(CACHE_DIR)) {
 
 
 // register maintenance admin page
+/*
 $user = User::getInstance();
 if (!is_cli() && $user->isLogin() && is_backend()) {
   
@@ -35,3 +36,5 @@ if (!is_cli() && $user->isLogin() && is_backend()) {
   );
 
 }
+ * 
+ */

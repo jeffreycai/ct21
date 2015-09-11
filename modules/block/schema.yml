@@ -11,6 +11,7 @@ block:
         widget_conf:
           required: 1
           wysiwyg: 1
+          wysiwyg_toolbar: standard
     names:
       en: Block
       zh: Content Block

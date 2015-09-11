@@ -5,6 +5,7 @@ include_once MODULESROOT . DS . 'core' . DS . 'includes' . DS . 'classes' . DS .
  * DB fields
  * - id
  * - title
+ * - summary
  * - content
  * - thumbnail
  * - image
@@ -40,6 +41,12 @@ class BaseNews extends DBObject {
    }
    public function getTitle() {
      return $this->getDbFieldTitle();
+   }
+   public function setSummary($var) {
+     $this->setDbFieldSummary($var);
+   }
+   public function getSummary() {
+     return $this->getDbFieldSummary();
    }
    public function setContent($var) {
      $this->setDbFieldContent($var);
@@ -87,6 +94,7 @@ class BaseNews extends DBObject {
 CREATE TABLE IF NOT EXISTS `news` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `title` VARCHAR(255) NOT NULL ,
+  `summary` TEXT ,
   `content` TEXT ,
   `thumbnail` VARCHAR(128) ,
   `image` VARCHAR(128) ,

@@ -16,4 +16,10 @@ users:
     salt: KLJKLdfljiioe
     role:
       - admin
-
+  cui:
+    email: george@ct21.com.au
+    name: George
+    password: ct21student
+    salt: KLJKLdfljiioe
+    role:
+      - admin

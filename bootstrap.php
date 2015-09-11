@@ -21,6 +21,7 @@ if (isset($custom_modules)) {
       'news',
       'carousel',
       'testimonial',
+      'page',
       'menu'
   );
 

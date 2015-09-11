@@ -18,11 +18,8 @@
 <table class="table table-striped table-bordered table-hover dataTable no-footer">
   <thead>
       <tr role="row">
-                <th>id</th>
                 <th>title</th>
-                <th>content</th>
-                <th>thumbnail</th>
-                <th>image</th>
+                <th>summary</th>
                 <th>date</th>
                 <th>Actions</th>
       </tr>
@@ -30,12 +27,9 @@
   <tbody>
     <?php foreach ($objects as $object): ?>
     <tr>
-            <td><?php echo $object->getId() ?></td>
             <td><?php echo $object->getTitle() ?></td>
-            <td><?php echo $object->getContent() ?></td>
-            <td><?php echo $object->getThumbnail() ?></td>
-            <td><?php echo $object->getImage() ?></td>
-            <td><?php echo $object->getDate() ?></td>
+            <td><?php echo $object->getSummary() ?></td>
+            <td><?php echo date('Y-m-d',$object->getDate()) ?></td>
             <td>
         <div class="btn-group">
           <a class="btn btn-default btn-sm" href="<?php echo uri('admin/news/edit/' . $object->getId()); ?>"><i class="fa fa-edit"></i></a>

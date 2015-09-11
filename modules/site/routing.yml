@@ -15,7 +15,21 @@ routing:
     isSecure: 0
     i18n: 0
     controller: site/country
-    
+  news:
+    path: ^\/news\/?$
+    isSecure: 0
+    i18n: 0
+    controller: site/news
+  news_single:
+    path: ^\/news\/(\d+)\/?$
+    isSecure: 0
+    i18n: 0
+    controller: site/news_single
+  apply_now:
+    path: ^\/apply\/?$
+    isSecure: 0
+    i18n: 0
+    controller: site/apply
 
 
 assets:

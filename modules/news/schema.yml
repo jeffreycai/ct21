@@ -3,6 +3,7 @@ news:
   fields:
     id: INT NOT NULL AUTO_INCREMENT
     title: VARCHAR(255) NOT NULL
+    summary: TEXT
     content: TEXT
     thumbnail: VARCHAR(128)
     image: VARCHAR(128)
@@ -13,11 +14,17 @@ news:
         widget: text
         widget_conf:
           required: 1
+      summary:
+        widget: textarea
+        widget_conf:
+          required: 1
+          wysiwyg: 0
       content:
         widget: textarea
         widget_conf:
           required: 1
           wysiwyg: 1
+          wysiwyg_toolbar: standard
       thumbnail:
         widget: image
         widget_conf:
@@ -33,7 +40,7 @@ news:
           multiple: 0
           upload_dir: files/news/image
           transform:
-            dimension: 300x244
+            dimension: 360x224
       date:
         widget: datepicker
         widget_conf:

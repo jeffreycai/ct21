@@ -1,4 +1,5 @@
 <?php
+/** $page has already been assigned by Page module **/
 
 $html = new HTML();
 $html->renderOut('site/components/html_header', array(
@@ -10,7 +11,8 @@ $html->output('<div id="page-container">');
 $html->renderOut('site/components/toptoolbar');
 $html->renderOut('site/components/header');
 $html->renderOut('site/contact', array(
-    'pagetitle' => 'Contact',
+    'pagetitle' => $page->getTitle(),
+    'content' => $page->getContent(),
     'googlemap' => $html->render('site/components/googlemap', array(
         'latitude' => '-33.877348',
         'longitude' => '151.2079613'

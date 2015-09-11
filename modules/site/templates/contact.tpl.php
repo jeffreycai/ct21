@@ -8,7 +8,7 @@
       <div class="entry-content full-width-content">
 <?php echo $googlemap; ?>
         <div class="dm3-two-third">
-          <?php echo Block::findByName('Contact page') ?>
+          <?php echo $content ?>
           <div class="dm3-divider-dotted"></div>
           <h3 id="contact-form">Send us an email</h3>
           <div role="form" lang="en-US" dir="ltr">

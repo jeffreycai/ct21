@@ -18,9 +18,7 @@
 <table class="table table-striped table-bordered table-hover dataTable no-footer">
   <thead>
       <tr role="row">
-                <th>id</th>
                 <th>title</th>
-                <th>image</th>
                 <th>content</th>
                 <th>button_text</th>
                 <th>button_link</th>
@@ -31,9 +29,7 @@
   <tbody>
     <?php foreach ($objects as $object): ?>
     <tr>
-            <td><?php echo $object->getId() ?></td>
             <td><?php echo $object->getTitle() ?></td>
-            <td><?php echo $object->getImage() ?></td>
             <td><?php echo $object->getContent() ?></td>
             <td><?php echo $object->getButtonText() ?></td>
             <td><?php echo $object->getButtonLink() ?></td>

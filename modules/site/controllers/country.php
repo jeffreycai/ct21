@@ -15,7 +15,10 @@ $html->renderOut('site/components/header');
 $html->renderOut('site/country', array(
     'country' => $country,
     'sidebar_right' => $html->render('site/components/sidebar_right', array(
-        
+        'blocks' => array(
+            $html->render('site/components/sidebar_block_countries'),
+            $html->render('site/components/sidebar_block_recent_news')
+        )
     ))
 ));
 $html->renderOut('site/components/countries_block', array(
