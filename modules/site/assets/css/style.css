@@ -140,3 +140,69 @@
   padding-top: 10px;
   line-height: inherit;
 }
+#banner {
+  background-repeat: none;
+  background-position: center;
+  background-size: cover;
+  height: 350px;
+}
+@media (max-width: 767px) {
+  #banner {
+    height: 250px;
+  }
+}
+#banner a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.sub-section {
+  border-top: 1px dashed #e7e7e7;
+  padding-top: 20px;
+  margin-top: 20px;
+  padding-bottom: 10px;
+}
+.card {
+  margin-bottom: 15px;
+  position: relative;
+  background: #FAFAFA;
+  padding: 7px;
+}
+.card a {
+  color: inherit;
+}
+.card a:hover {
+  color: #149dd2;
+}
+.card .left img {
+  display: block;
+  width: 150px;
+  position: absolute;
+  top: 7px;
+  left: 7px;
+  border: 5px #EAEAEA solid;
+}
+.card .right {
+  padding-left: 185px;
+  min-height: 105px;
+}
+.highlight-list {
+  list-style: none;
+  margin-left: 0px;
+}
+.highlight-list li a {
+  color: inherit;
+}
+.highlight-list li a:hover {
+  color: #149dd2;
+}
+.widget a {
+  color: inherit;
+}
+.widget a:hover {
+  color: #149dd2;
+}
+.breadcrumb {
+  margin-bottom: 15px;
+  font-size: 1.1em;
+}

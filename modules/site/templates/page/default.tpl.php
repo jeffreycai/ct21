@@ -1,8 +1,11 @@
 <section class="section-content">
   <div class="container clearfix">
-    <article id="post-487" class="post-487 page type-page status-publish hentry">
+    <article class="page type-page status-publish hentry">
       <div class="entry-content full-width-content">
         <div class="dm3-two-third">
+          
+          <?php echo $breadcrumb; ?>
+          
           <h1 class="entry-title"><?php echo $page->getTitle() ?></h1>
           <?php echo $page->getContent() ?>
         </div>

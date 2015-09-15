@@ -12,8 +12,19 @@ $html->renderOut('site/components/html_header', array(
 $html->output('<div id="page-container">');
 $html->renderOut('site/components/toptoolbar');
 $html->renderOut('site/components/header');
+$html->renderOut('site/components/banner', array(
+    'country' => $country
+));
 $html->renderOut('site/country', array(
+    'breadcrumb' => $html->render('site/components/breadcrumb', array(
+        'items' => array(
+            'Home' => uri(''),
+            $country->getName() => false
+        )
+    )),
     'country' => $country,
+    'institutions' => Institution::findAllByCountryId($country->getId()),
+    'courses' => Course::findAllByCountryId($country->getId()),
     'sidebar_right' => $html->render('site/components/sidebar_right', array(
         'blocks' => array(
             $html->render('site/components/sidebar_block_countries'),

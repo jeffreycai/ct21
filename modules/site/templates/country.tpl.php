@@ -1,27 +1,46 @@
 <section class="section-content">
   <div class="container clearfix">
     <div class="main-content">
+      
+      <?php echo $breadcrumb ?>
+      
       <article id="course-142" class="ib-edu-course-single post-142 ib_educator_course type-ib_educator_course status-publish has-post-thumbnail hentry ib_educator_category-business ib_educator_category-entrepreneurship">
-
-
-
         <div class="course-content entry-content">
-          <div class="course-image"><img width="620" height="384" src="<?php echo uri($country->getImage()) ?>" class="attachment-ib-educator-main-column wp-post-image" alt="<?php echo htmlentities($country->getName()) ?>" /></div>
+          <h1><?php echo $country->getName() ?></h1>
           <?php echo $country->getContent() ?>
         </div>
       </article>
-      <ul class="educator-share-links clearfix">
-        <li class="label">Share:</li>
-        <li>
-          <a href="#" title="Facebook" target="_blank"><span class="fa fa-facebook"></span></a>
-        </li>
-        <li>
-          <a href="#" title="Google+" target="_blank"><span class="fa fa-google-plus"></span></a>
-        </li>
-        <li>
-          <a href="https://twitter.com/share?url=http%3A%2F%2Feducator.incrediblebytes.com%2Fcourses%2Finternet-entrepreneurship%2F&#038;text=Internet+Entrepreneurship&#038;via=incrediblebytes" title="Twitter" target="_blank"><span class="fa fa-twitter"></span></a>
-        </li>
-      </ul>
+<?php if (sizeof($institutions)): ?>
+      <div id="institutions" class="sub-section">
+        <h2>Recommended Institutions</h2>
+<?php foreach ($institutions as $i): ?>
+        <div class="card">
+          <div class="left">
+            <img src="<?php echo uri($i->getImage()) ?>" />
+          </div>
+          <div class="right">
+            <h3><a href="<?php echo uri('institution/' . $i->getId()) ?>"><?php echo $i->getTitle() ?></a></h3>
+          </div>
+        </div>
+<?php endforeach; ?>
+      </div>
+<?php endif; ?>
+      
+      
+      
+<?php if (sizeof($courses)): ?>
+      <div id="institutions" class="sub-section">
+        <h2>Recommended Courses</h2>
+        <ul class="highlight-list">
+<?php foreach ($courses as $c): ?>
+          <li><i class="fa fa-book"></i> <a href="<?php echo uri('course/' . $c->getId()) ?>">
+ <?php echo $c->getTitle() ?></a></li>
+<?php endforeach; ?>
+        </ul>
+      </div>
+<?php endif; ?>
+      
+      
     </div>
 
     <?php echo $sidebar_right; ?>

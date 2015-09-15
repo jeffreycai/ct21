@@ -4,6 +4,7 @@ country:
     id: INT NOT NULL AUTO_INCREMENT
     name: VARCHAR(31) NOT NULL
     image: VARCHAR(255)
+    banner_image: VARCHAR(255)
     content: TEXT
   form:
     fields:
@@ -19,6 +20,14 @@ country:
           upload_dir: files/country
           transform:
             dimension: 300x244
+      banner_image:
+        widget: image
+        widget_conf:
+          required: 1
+          multiple: 0
+          upload_dir: files/country/banner
+          transform:
+            dimension: 1140x385
       content:
         widget: textarea
         widget_conf:

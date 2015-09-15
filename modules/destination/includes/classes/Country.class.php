@@ -7,6 +7,15 @@ class Country extends BaseCountry {
     if (is_file(WEBROOT . DS .$this->getImage()) && strpos($this->getImage(), 'site/assets') === false) {
       unlink(WEBROOT . DS . $this->getImage());
     }
+    if (is_file(WEBROOT . DS .$this->getBannerImage()) && strpos($this->getBannerImage(), 'site/assets') === false) {
+      unlink(WEBROOT . DS . $this->getBannerImage());
+    }
+    
+    // we then delete all institutions under it
+    foreach (Institution::findAllByCountryId($this->getId()) as $i) {
+      $i->delete();
+    }
+    
     return parent::delete();
   }
   

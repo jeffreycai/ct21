@@ -17,6 +17,8 @@ if (isset($custom_modules)) {
       'site',
       'mail',
       'destination',
+      'institution',
+      'course',
       'block',
       'news',
       'carousel',

@@ -26,6 +26,13 @@ if (isset($_POST['submit'])) {
     $error_flag = true;
   }
   
+  // validation for $banner_image
+  $banner_image = isset($_POST["banner_image"]) ? strip_tags(trim($_POST["banner_image"])) : null;
+  if (empty($banner_image)) {
+    Message::register(new Message(Message::DANGER, i18n(array("en" => "banner_image is required.", "zh" => "请填写banner_image"))));
+    $error_flag = true;
+  }
+  
   // validation for $content
   $content = isset($_POST["content"]) ? $_POST["content"] : null;
   if (empty($content)) {
@@ -39,6 +46,9 @@ if (isset($_POST['submit'])) {
   
   // proceed for $image
   $object->setImage($image);
+  
+  // proceed for $banner_image
+  $object->setBannerImage($banner_image);
   
   // proceed for $content
   $object->setContent($content);

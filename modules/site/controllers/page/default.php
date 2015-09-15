@@ -11,6 +11,12 @@ $html->output('<div id="page-container">');
 $html->renderOut('site/components/toptoolbar');
 $html->renderOut('site/components/header');
 $html->renderOut('site/page/default', array(
+    'breadcrumb' => $html->render('site/components/breadcrumb', array(
+        'items' => array(
+            'Home' => uri(''),
+            $page->getTitle() => false
+        )
+    )),
     'page' => $page,
     'full_page_sidebar_right' => $html->render('site/components/full_page_sidebar_right', array(
       'blocks' => array(

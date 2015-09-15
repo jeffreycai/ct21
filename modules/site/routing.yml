@@ -30,6 +30,16 @@ routing:
     isSecure: 0
     i18n: 0
     controller: site/apply
+  institution:
+    path: ^\/institution\/(\d+)\/?$
+    isSecure: 0
+    i18n: 0
+    controller: site/institution
+  course:
+    path: ^\/course\/(\d+)\/?$
+    isSecure: 0
+    i18n: 0
+    controller: site/course
 
 
 assets:
