@@ -12,7 +12,9 @@
       <aside class="widget widget_nav_menu" id="nav_menu-3"><h3 class="widget-title">Links</h3><div class="menu-links-container">
           <ul class="menu" id="menu-links">
 <?php foreach (Menu::findByName('底部LINKS')->getRootItem()->getChildren() as $item): ?>
-            <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="<?php echo uri($item->getUri()) ?>"><?php echo $item->getName() ?></a></li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page">
+              <a href="<?php echo strpos($item->getUri(), 'http') === 0 ? $item->getUri() : uri($item->getUri()) ?>"><?php echo $item->getName() ?></a>
+            </li>
 <?php endforeach; ?>
           </ul>
         </div>
