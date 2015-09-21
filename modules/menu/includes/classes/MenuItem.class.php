@@ -35,9 +35,24 @@ class MenuItem extends BaseMenuItem {
       $this->setChildren($rtn);
       
       for ($i = 0; $i < sizeof($this->getChildren()); $i++) {
-        $this->getChildren()[$i]->populateChildren($level, $display);
+        $this->children[$i]->populateChildren($level, $display);
       }
     }
 
+  }
+  
+  static function findAllByMenuId($menu_id) {
+    global $mysqli;
+    $query = "SELECT * FROM menu_item WHERE menu_id=$menu_id";
+    $result = $mysqli->query($query);
+    
+    $rtn = array();
+    while ($result && $b = $result->fetch_object()) {
+      $obj= new MenuItem();
+      DBObject::importQueryResultToDbObject($b, $obj);
+      $rtn[] = $obj;
+    }
+    
+    return $rtn;
   }
 }

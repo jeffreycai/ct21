@@ -92,8 +92,8 @@ class FormWidgetImage extends FormWidget {
       var file = this.files[0];
       if (!file.type.match(/^image/)) {
         alert('[[[ echo i18n(array('en' => 'Upload file needs to be an image file', 'zh' => '上传文件需为图片文件')) ]]]');
-      } else if (file.size > (1 * 1000 * 1000)) {
-        alert('[[[ echo i18n(array('en' => 'File size should be less than', 'zh' => '文件大小应小于')) . ' 2MB' ]]]');
+      } else if (file.size > (4 * 1000 * 1000)) {
+        alert('[[[ echo i18n(array('en' => 'File size should be less than', 'zh' => '文件大小应小于')) . ' 4MB' ]]]');
       } else {
         var reader = new FileReader();
         reader.onload = (function(e){

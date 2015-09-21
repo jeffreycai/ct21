@@ -5,7 +5,7 @@ class Menu extends BaseMenu {
   
   public function getRootItem($level = 1, $display = null) {
     $item = MenuItem::findById($this->getRootMenuItemId());
-    $item->populateChildren($level = 1, $display = null);
+    $item->populateChildren($level, $display);
     return $item;
   }
   
@@ -20,5 +20,14 @@ class Menu extends BaseMenu {
       return $obj;
     }
     return null;
+  }
+  
+  public function clear() {
+    $items = MenuItem::findAllByMenuId($this->getId());
+    foreach ($items as $item) {
+      if ($item->getParentId()) {
+        $item->delete();
+      }
+    }
   }
 }

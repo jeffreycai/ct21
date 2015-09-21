@@ -1,6 +1,12 @@
 <?php
 /** $page has already been assigned by Page module **/
 
+// forward 404 if not published
+if (!$page->getPublished()) {
+  dispatch('site/404');
+  exit;
+}
+
 $html = new HTML();
 $html->renderOut('site/components/html_header', array(
     'title' => $page->getTitle(),

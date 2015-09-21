@@ -1,9 +1,26 @@
 <?php
-
 $id = isset($vars[1]) ? $vars[1] : null;
 $object = MenuItem::findById($id);
+$ajax = isset($_GET['ajax']) ? true : false;
+
 if (is_null($object)) {
-  HTML::forward('core/404');
+  if ($ajax) {
+    die("error");
+  } else {
+    HTML::forward('core/404');
+  }
+}
+
+// for ajax
+if ($ajax) {
+  $object->setName(strip_tags($_POST['name']));
+  if ($object->save()) {
+    echo $object->getName();
+    exit;
+  } else {
+    echo "error";
+    exit;
+  }
 }
 
 // handle form submission

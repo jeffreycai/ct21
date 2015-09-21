@@ -32,11 +32,11 @@ if (isset($_FILES)) {
           'en' => 'Upload file needs to be an image file',
           'zh' => '上传文件需为图片文件'
       ));
-    } else if ($size > (1 * 1000 * 1000)) {
+    } else if ($size > (4 * 1000 * 1000)) {
       $error_msg = i18n(array(
           'en' => 'Max upload file size should be less than',
           'zh' => '最大上传文件应小于'
-      )) . ' 1MB';
+      )) . ' 4MB';
     }
     if ($error_msg) {
       $rtn->error = $error_msg;
@@ -51,9 +51,9 @@ if (isset($_FILES)) {
         $watermark = false;
         if ($refill) {
           $bgcolor = $image->allocateColor(0);
-          $image = $image->resize(300, 244, 'inside')->resizeCanvas(300, 244, 'center', 'center', $bgcolor);
+          $image = $image->resize(360, 224, 'inside')->resizeCanvas(360, 224, 'center', 'center', $bgcolor);
         } else {
-          $image = $image->resize(300, 244, 'outside')->resizeCanvas(300, 244, 'center', 'center');
+          $image = $image->resize(360, 224, 'outside')->resizeCanvas(360, 224, 'center', 'center');
         }
 
         if ($watermark) {

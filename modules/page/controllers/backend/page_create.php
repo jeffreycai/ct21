@@ -8,10 +8,10 @@ if (isset($_POST['submit'])) {
 
   /// validation
   
-  // validation for $url
-  $url = isset($_POST["url"]) ? strip_tags($_POST["url"]) : null;
-  if (empty($url)) {
-    Message::register(new Message(Message::DANGER, i18n(array("en" => "url is required.", "zh" => "请填写url"))));
+  // validation for $uri
+  $uri = isset($_POST["uri"]) ? strip_tags($_POST["uri"]) : null;
+  if (empty($uri)) {
+    Message::register(new Message(Message::DANGER, i18n(array("en" => "uri is required.", "zh" => "请填写uri"))));
     $error_flag = true;
   }
   
@@ -32,8 +32,8 @@ if (isset($_POST['submit'])) {
   // validation for $published
   $published = isset($_POST["published"]) ? 1 : 0;  /// proceed submission
   
-  // proceed for $url
-  $object->setUrl($url);
+  // proceed for $uri
+  $object->setUri($uri);
   
   // proceed for $title
   $object->setTitle($title);

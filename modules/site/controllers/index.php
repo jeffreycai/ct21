@@ -3,8 +3,15 @@
 // get youtube video url from block
 $block = Block::findByName('Youtube video');
 $matches = array();
-preg_match('/\/\/www.youtube.com\/embed\/[^\<]+/', $block, $matches);
-$youtube_url = $matches[0];
+preg_match('/www.youtube.com\/embed\/([^\<&]+)/', $block, $matches);
+if (isset($matches[1])) {
+  $youtube_id = $matches[1];
+} else {
+  preg_match('/www.youtube.com\/watch\?v=([^\<&]+)/', $block, $matches);
+  $youtube_id = $matches[1];
+}
+$youtube_url = isset($youtube_id) ? "https://www.youtube.com/embed/$youtube_id" : 'https://www.youtube.com/embed/jiBxpdobg0E';
+
 
 
 $html = new HTML();

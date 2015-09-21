@@ -75,61 +75,82 @@ With an aim to foster the necessary vocational abilities, technical secondary sc
   $country->save();
   
   $country = new Country();
-  $country->setName('Korea');
-  $country->setImage('modules/site/assets/images/korea.jpg');
-  $country->setBannerImage('modules/site/assets/images/korea_banner.jpg');
+  $country->setName('China');
+  $country->setImage('modules/site/assets/images/china.jpg');
+  $country->setBannerImage('modules/site/assets/images/china_banner.jpg');
   $country->setContent('
-<h2>Educational System of Korea</h2>
-<p>As a means of success and the basic condition for realization of personal values, education has been attached with great importance in Korea. Modern education was first introduced to Korea in 1880. One of the first things that the Korean government established in 1945 was to establish the modern educational system of the Broadcasting and Communication University. In 1953, the Korean government introduced the 6-year compulsory educational system over the entire nation. Today, the Korean people are proud of their high college admission rate. The well-educated citizens of Korea form the basis for its accelerated economic growth over the past 30 years.
+<h2>An Introduction to China</h2>
+<p>China is staggeringly vast and a land of great diversity.It is the world\'s most populous nation and the third largest country, almost a continent in itself.
 </p>
 <p>
-Korea\'s educational system features 6 years of elementary school education, 3 years of junior high school education, 3 years of senior high school education and 4 years of university education, which if appropriate are then followed by master and doctorate education. There are also technological colleges with 2 to 3 years of courses. Elementary and secondary education offers lessons in morality, basic literacy and knowledge, etc. From senior high school on, courses are divided into humanities, nature, business, industry, art and special fields that are provided depending on students’ wishes. The compulsory education free of charge implemented in some secondary schools will be expanded to cover all secondary schools starting from 2004. </p>
-');
-  $country->save();
-  
-  $country = new Country();
-  $country->setName('Singapo');
-  $country->setImage('modules/site/assets/images/singapo.jpg');
-  $country->setBannerImage('modules/site/assets/images/singapo_banner.jpg');
-  $country->setContent('
-<h2>Educational System of Korea</h2>
-<p>Education in Singapore is managed by the Ministry of Education (MOE), which controls the development and administration of state schools receiving government funding, but also has an advisory and supervisory role in respect of private schools. For both private and state schools, there are variations in the extent of autonomy in their curriculum, scope of government aid and funding, tuition burden on the students, and admission policy.
+Stretching from its southern borders in the Himalayas to the deserts of Mongolia in the north, and from the East China Sea through the Yangzi River Valley plains, to the Tibetan Plateau in the western mainland, China covers an area of 9.6 million square kilometers or 3.7 million square miles...</p>
+<p>
+China encompasses over 5000 islands and comprises five autonomous regions and twenty-two provinces, as well as Hong Kong and Macau, which are now known as “Special Administrative Regions”.The seat of government is Beijing, an enormous city of 11 million people.In Beijing, like all of China\'s urban metropolises, life contrasts immensely with that of the peasant farmers in rural areas.Because of its size, China\'s climate is very diverse, ranging from an unbearable 48oC in the northwest summer to a freezing cold minus 40oC in the winter in the far north.
 </p>
 <p>
-Education spending usually makes up about 20 percent of the annual national budget, which subsidises state education and government-assisted private education for Singaporean citizens and funds the Edusave programme, the costs for which are significantly higher for non-citizens. In 2000 the Compulsory Education Act codified compulsory education for children of primary school age (excepting those with disabilities), and made it a criminal offence for parents to fail to enroll their children in school and ensure their regular attendance. Exemptions are allowed for homeschooling or full-time religious institutions, but parents must apply for exemption from the Ministry of Education and meet a minimum benchmark.</p>
+The official language in China is Mandarin, as spoken in Beijing, but there are also many different dialects to listen for.Chinese food, and much of the ingredients used to create it, is like no other cuisine, and again this differs greatly between regions.Art in China is also stunningly unique, perhaps best typified by its calligraphy, created with ink and brush and held in extremely high esteem by the Chinese.
+</p>
+<h2>Education System of China</h2>
+<p>
+The education system or terms in China is similar as Japan and Korea. The higher education system or terms is similar as U.S.A.
+</p>
+<p>
+School education of China includes preschool, primary school, secondary school, high school and university at both the undergraduate and postgraduate level.
+</p>
+<p>
+The following is the school age requirement and the fixed school terms at different levels.
+Kindergartens take children above three years old with a term of three school years.
+Primary and Junior high schools provide a total of nine years of compulsory education.Primary school is usually six years and junior high school is usually three years, or just nine years inclusive of both primary and junior schooling in some areas. School age for primary schools is usually six and 13 for secondary schools.
+</p>
+<p>
+School age for common Senior High schools is 15 or 16, with a term of three school years, secondary vocational schools usually provide three or four years education and technical schools provide three years education.
+</p>
 ');
   $country->save();
-  
-  $country = new Country();
-  $country->setName('Canada');
-  $country->setImage('modules/site/assets/images/canada.jpg');
-  $country->setBannerImage('modules/site/assets/images/canada_banner.jpg');
-  $country->setContent('
-<h2>Introduction to Canadian Educational System</h2>
-<p>Inheriting the meticulous teaching style of Britain, Canada is world-renowned for its high quality education and attracts a multitude of overseas students each year. Meanwhile, each province of Canada has established its own suitable and independent educational system. The Canadian educational system features 6-8 years of primary school education, 4-7 years of high school education, 3-4 years of college education, 1-3 years of master education and 1-3 years of doctor education.</p>
-');
-  $country->save();
-  
-  $country = new Country();
-  $country->setName('England');
-  $country->setImage('modules/site/assets/images/england.jpg');
-  $country->setBannerImage('modules/site/assets/images/england_banner.jpg');
-  $country->setContent('
-<h2>Study in UK </h2>
-<h3>University foundation programs</h3>
-<p>British schools also provide university foundation courses that are specially established for overseas students who can not directly advance to study for a bachelor degree. Completion of the foundation courses will qualify students for college and universities.</p>
-
-<h3>Higher education</h3>
-<p>High national diploma (HND): it is equivalent to the college diploma in many countries and obtaining this diploma will qualify students for a one-year graduate study, upon its completion the student will be awarded a bachelor\'s degree.</p>
-
-<h3>Bachelor Degree</h3>
-<p>now more than 90 universities and 150-plus colleges provide graduate or postgraduate courses with such common degrees as Bachelor of Arts, Master of Business Administration (MBA), Bachelor of Education, Bachelor of Science (BSc), Bachelor of Engineering, Bachelor of Law, Bachelor of Medicine etc. Graduate courses normally take three years (The Scottish honorary diploma will take 4 years). Medical science, dentistry, architecture and veterinary science may take anywhere between five to seven years.</p>
-
-<h3>Master Degree</h3>
-<p>the postgraduate courses in Britain mainly fall into two categories, i.e. one that is class based which normally takes 12 months, including class teaching, topic discussion, exams and consecutive comments and thesis, etc.; the other type of course is a Research Course.? Such courses provide optimal opportunities for students who want to develop their professional interests. Normally, students, under the guidance of a teacher, can decide and start their research. In this case, independent research capability is very important for students taking the Research Course. In general, these students shall engage in full-time research work for 1-2 year(s) on campus.</p>
-
-<h3>Doctor of Philosophy (PhD)</h3>
-<p>the schooling length of a PhD is variable depending on the courses but normally will take 3 years. The student needs to have a master degree first of all to study a PhD. However, the students who have a bachelor’s degree and want to study a PhD may now consider the 2000 continuous academic project that involves postgraduate and doctoral study. This new length of schooling adopted by ten outstanding universities in Britain features module-type teaching method where students may research by themselves and thus it better satisfies the requirements of high-caliber talents. Its courses take 4 years to complete. </p>
-');
-  $country->save();
+//  
+//  $country = new Country();
+//  $country->setName('Singapo');
+//  $country->setImage('modules/site/assets/images/singapo.jpg');
+//  $country->setBannerImage('modules/site/assets/images/singapo_banner.jpg');
+//  $country->setContent('
+//<h2>Educational System of Korea</h2>
+//<p>Education in Singapore is managed by the Ministry of Education (MOE), which controls the development and administration of state schools receiving government funding, but also has an advisory and supervisory role in respect of private schools. For both private and state schools, there are variations in the extent of autonomy in their curriculum, scope of government aid and funding, tuition burden on the students, and admission policy.
+//</p>
+//<p>
+//Education spending usually makes up about 20 percent of the annual national budget, which subsidises state education and government-assisted private education for Singaporean citizens and funds the Edusave programme, the costs for which are significantly higher for non-citizens. In 2000 the Compulsory Education Act codified compulsory education for children of primary school age (excepting those with disabilities), and made it a criminal offence for parents to fail to enroll their children in school and ensure their regular attendance. Exemptions are allowed for homeschooling or full-time religious institutions, but parents must apply for exemption from the Ministry of Education and meet a minimum benchmark.</p>
+//');
+//  $country->save();
+//  
+//  $country = new Country();
+//  $country->setName('Canada');
+//  $country->setImage('modules/site/assets/images/canada.jpg');
+//  $country->setBannerImage('modules/site/assets/images/canada_banner.jpg');
+//  $country->setContent('
+//<h2>Introduction to Canadian Educational System</h2>
+//<p>Inheriting the meticulous teaching style of Britain, Canada is world-renowned for its high quality education and attracts a multitude of overseas students each year. Meanwhile, each province of Canada has established its own suitable and independent educational system. The Canadian educational system features 6-8 years of primary school education, 4-7 years of high school education, 3-4 years of college education, 1-3 years of master education and 1-3 years of doctor education.</p>
+//');
+//  $country->save();
+//  
+//  $country = new Country();
+//  $country->setName('England');
+//  $country->setImage('modules/site/assets/images/england.jpg');
+//  $country->setBannerImage('modules/site/assets/images/england_banner.jpg');
+//  $country->setContent('
+//<h2>Study in UK </h2>
+//<h3>University foundation programs</h3>
+//<p>British schools also provide university foundation courses that are specially established for overseas students who can not directly advance to study for a bachelor degree. Completion of the foundation courses will qualify students for college and universities.</p>
+//
+//<h3>Higher education</h3>
+//<p>High national diploma (HND): it is equivalent to the college diploma in many countries and obtaining this diploma will qualify students for a one-year graduate study, upon its completion the student will be awarded a bachelor\'s degree.</p>
+//
+//<h3>Bachelor Degree</h3>
+//<p>now more than 90 universities and 150-plus colleges provide graduate or postgraduate courses with such common degrees as Bachelor of Arts, Master of Business Administration (MBA), Bachelor of Education, Bachelor of Science (BSc), Bachelor of Engineering, Bachelor of Law, Bachelor of Medicine etc. Graduate courses normally take three years (The Scottish honorary diploma will take 4 years). Medical science, dentistry, architecture and veterinary science may take anywhere between five to seven years.</p>
+//
+//<h3>Master Degree</h3>
+//<p>the postgraduate courses in Britain mainly fall into two categories, i.e. one that is class based which normally takes 12 months, including class teaching, topic discussion, exams and consecutive comments and thesis, etc.; the other type of course is a Research Course.? Such courses provide optimal opportunities for students who want to develop their professional interests. Normally, students, under the guidance of a teacher, can decide and start their research. In this case, independent research capability is very important for students taking the Research Course. In general, these students shall engage in full-time research work for 1-2 year(s) on campus.</p>
+//
+//<h3>Doctor of Philosophy (PhD)</h3>
+//<p>the schooling length of a PhD is variable depending on the courses but normally will take 3 years. The student needs to have a master degree first of all to study a PhD. However, the students who have a bachelor’s degree and want to study a PhD may now consider the 2000 continuous academic project that involves postgraduate and doctoral study. This new length of schooling adopted by ten outstanding universities in Britain features module-type teaching method where students may research by themselves and thus it better satisfies the requirements of high-caliber talents. Its courses take 4 years to complete. </p>
+//');
+//  $country->save();
 }

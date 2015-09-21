@@ -22,9 +22,9 @@
 <form class="form-horizontal" role="form" method="POST" action="<?php echo uri('admin/page/edit/' . $object->getId()) ?>">
   
 <div class='form-group'>
-  <label class='col-sm-2 control-label' for='url'>url <span style="color: rgb(185,2,0); font-weight: bold;">*</span></label>
+  <label class='col-sm-2 control-label' for='uri'>uri <span style="color: rgb(185,2,0); font-weight: bold;">*</span></label>
   <div class='col-sm-10'>
-    <input value='<?php echo htmlentities(str_replace('\'', '"', ($object->isNew() ? (isset($_POST['url']) ? strip_tags($_POST['url']) : '') : $object->getUrl()))) ?>' type='text' class='form-control' id='url' name='url' required />
+    <input value='<?php echo htmlentities(str_replace('\'', '"', ($object->isNew() ? (isset($_POST['uri']) ? strip_tags($_POST['uri']) : '') : $object->getUri()))) ?>' type='text' class='form-control' id='uri' name='uri' required />
   </div>
 </div>
 <div class='hr-line-dashed'></div>

@@ -20,9 +20,6 @@
       <tr role="row">
                 <th>id</th>
                 <th>name</th>
-                <th>image</th>
-                <th>banner_image</th>
-                <th>content</th>
                 <th>Actions</th>
       </tr>
   </thead>
@@ -31,9 +28,6 @@
     <tr>
             <td><?php echo $object->getId() ?></td>
             <td><?php echo $object->getName() ?></td>
-            <td><?php echo $object->getImage() ?></td>
-            <td><?php echo $object->getBannerImage() ?></td>
-            <td><?php echo $object->getContent() ?></td>
             <td>
         <div class="btn-group">
           <a class="btn btn-default btn-sm" href="<?php echo uri('admin/country/edit/' . $object->getId()); ?>"><i class="fa fa-edit"></i></a>

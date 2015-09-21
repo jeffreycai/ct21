@@ -10,7 +10,7 @@ page:
     reserved: TINYINT DEFAULT 0
   form:
     fields:
-      url:
+      uri:
         widget: text
         widget_conf:
           required: 1

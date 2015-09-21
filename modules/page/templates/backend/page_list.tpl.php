@@ -18,20 +18,22 @@
 <table class="table table-striped table-bordered table-hover dataTable no-footer">
   <thead>
       <tr role="row">
+                <th>uri</th>
                 <th>title</th>
+                <th>published</th>
                 <th>Actions</th>
       </tr>
   </thead>
   <tbody>
     <?php foreach ($objects as $object): ?>
     <tr>
+            <td><?php echo $object->getUri() ?></td>
             <td><?php echo $object->getTitle() ?></td>
+            <td><?php echo $object->getPublished() ?></td>
             <td>
         <div class="btn-group">
           <a class="btn btn-default btn-sm" href="<?php echo uri('admin/page/edit/' . $object->getId()); ?>"><i class="fa fa-edit"></i></a>
-          <?php if (!$object->getReserved()): ?>
           <a onclick="return confirm('<?php echo i18n(array('en' => 'Are you sure to delete this record ?', 'zh' => '你确定删除这条记录吗 ?')); ?>');" class="btn btn-default btn-sm" href="<?php echo uri('admin/page/delete/' . $object->getId(), false); ?>"><i class="fa fa-remove"></i></a>
-          <?php endif; ?>
         </div>
       </td>
     </tr>

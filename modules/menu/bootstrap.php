@@ -3,7 +3,7 @@
 
 
 // register admin
-/*
+
 $user = User::getInstance();
 if (is_backend() && $user->isLogin()) {
   Backend::registerSideNav(
@@ -15,17 +15,17 @@ if (is_backend() && $user->isLogin()) {
           'en' => 'List',
           'zh' => '列表'
       )).'</a></li>
-      <li><a href="'.uri('admin/menu/create').'">'.i18n(array(
+<!--      <li><a href="'.uri('admin/menu/create').'">'.i18n(array(
           'en' => 'Create',
           'zh' => '创建'
-      )).'</a></li>
+      )).'</a></li>-->
     </ul>
   </li>
   '        
   );
 }
 
-
+/*
 // register admin
 $user = User::getInstance();
 if (is_backend() && $user->isLogin()) {
