@@ -18,8 +18,8 @@
 <table class="table table-striped table-bordered table-hover dataTable no-footer">
   <thead>
       <tr role="row">
-                <th>uri</th>
                 <th>title</th>
+                <th>uri</th>
                 <th>published</th>
                 <th>Actions</th>
       </tr>
@@ -27,8 +27,8 @@
   <tbody>
     <?php foreach ($objects as $object): ?>
     <tr>
-            <td><?php echo $object->getUri() ?></td>
             <td><?php echo $object->getTitle() ?></td>
+            <td><?php echo $object->getUri() ?></td>
             <td><?php echo $object->getPublished() ?></td>
             <td>
         <div class="btn-group">

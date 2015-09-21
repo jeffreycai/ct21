@@ -13,6 +13,9 @@ if (isset($_POST['submit'])) {
   if (empty($uri)) {
     Message::register(new Message(Message::DANGER, i18n(array("en" => "uri is required.", "zh" => "请填写uri"))));
     $error_flag = true;
+  } else if (preg_match('/[^a-zA-Z\-]/', $uri)) {
+    Message::register(new Message(Message::DANGER, i18n(array("en" => "uri can only be letters and -.", "zh" => "uri必须为英文字母或者 -"))));
+    $error_flag = true;
   }
   
   // validation for $title

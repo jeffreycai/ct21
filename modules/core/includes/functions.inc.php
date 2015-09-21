@@ -141,7 +141,7 @@ function echo_link_active_class($pattern, $current_url, $class='active') {
     $current_url = substr($current_url, 3);
   }
   $current_url = trim($current_url, "/");
-  if (preg_match($pattern, $current_url)) {
+  if (@preg_match($pattern, $current_url)) {
     echo " $class ";
   }
 }

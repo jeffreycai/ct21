@@ -14,8 +14,13 @@ if (is_null($object)) {
 // for ajax
 if ($ajax) {
   $object->setName(strip_tags($_POST['name']));
+  $object->setUri(strip_tags($_POST['url']));
   if ($object->save()) {
-    echo $object->getName();
+    $rtn = new stdClass();
+    $rtn->name = $object->getName();
+    $rtn->url = $object->getUri();
+    header('Content-Type: application/json');
+    echo json_encode($rtn);
     exit;
   } else {
     echo "error";

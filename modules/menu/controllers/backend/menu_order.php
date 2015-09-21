@@ -44,6 +44,14 @@ if (isset($_POST['submit'])) {
 HTML::registerHeaderLower('<script type="text/javascript" src="'.uri('modules/menu/assets/js/jquery-sortable-min.js').'"></script>');
 // register extra css
 HTML::registerHeaderLower('<style>
+ol.default li {
+  cursor: default !important;
+}
+ol.default li .fa-arrows,
+ol.default li .actions a:hover {
+  cursor: pointer !important;
+}
+
 body.dragging, body.dragging * {
   cursor: move !important;
 }
@@ -73,7 +81,7 @@ ol.vertical li .actions {
   right: 10px;
   top: 5px;
 }
-ol.vertical li .name {
+ol.vertical li .fields {
   position: absolute;
   left: 0px;
   top: 2px;
@@ -190,6 +198,7 @@ ol.nav ol.dropdown-menu li.placeholder::before {
     margin-top: -5px;
     top: 0;
 }
+
 </style>');
 
 
