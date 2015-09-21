@@ -89,4 +89,26 @@ if (is_cli()) {
           <p>Our headquarter is located in Sydney CBD with easy access by public transportation. We open Monday to Friday from 9AM to 5PM, Saturday to Sunday from 9AM to 1PM. We are present on all business hours on phone. You can also reach us by email or filling up the contact form below.</p>
 ');
   $page->save();
+  
+  // student service
+  $page = new Page();
+  $page->setUri('services/student');
+  $page->setTitle('Student service');
+  $page->setReserved(0);
+  $page->setContent('
+<h3>We help you to apply for educational institution</h3>
+          <p>Some content goes here.</p>
+');
+  $page->save();
+  
+  // immigration service
+  $page = new Page();
+  $page->setUri('services/immigration');
+  $page->setTitle('Immigration service');
+  $page->setReserved(0);
+  $page->setContent('
+<h3>We help you to Immigrate</h3>
+          <p>Some content goes here.</p>
+');
+  $page->save();
 }
