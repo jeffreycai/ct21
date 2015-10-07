@@ -53,7 +53,7 @@ Saturday-Sunday: 9AM to 1PM</p>
   $block = new Block();
   $block->setName('Youtube video');
   $block->setContent('
-  <p>https://www.youtube.com/embed/PCm8FLQW8FA</p>
+  <p>https://www.youtube.com/watch?v=jiBxpdobg0E</p>
 ');
   $block->save();
   

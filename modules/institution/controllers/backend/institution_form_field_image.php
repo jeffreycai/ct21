@@ -47,7 +47,7 @@ if (isset($_FILES)) {
       try {
         $image = WideImage::load($tmp_location);
         unlink($tmp_location);
-        $refill = false;
+        $refill = "255,255,255";
         $watermark = false;
         if ($refill) {
           $bgcolor = $image->allocateColor(0);

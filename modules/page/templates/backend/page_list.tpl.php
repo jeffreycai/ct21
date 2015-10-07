@@ -33,7 +33,9 @@
             <td>
         <div class="btn-group">
           <a class="btn btn-default btn-sm" href="<?php echo uri('admin/page/edit/' . $object->getId()); ?>"><i class="fa fa-edit"></i></a>
+          <?php if (!$object->getReserved()): ?>
           <a onclick="return confirm('<?php echo i18n(array('en' => 'Are you sure to delete this record ?', 'zh' => '你确定删除这条记录吗 ?')); ?>');" class="btn btn-default btn-sm" href="<?php echo uri('admin/page/delete/' . $object->getId(), false); ?>"><i class="fa fa-remove"></i></a>
+          <?php endif; ?>
         </div>
       </td>
     </tr>

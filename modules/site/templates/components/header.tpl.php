@@ -4,7 +4,7 @@
       <div class="container clearfix">
         <div id="main-logo">
           <a href="<?php echo uri('') ?>">
-            <img src="http://educator.incrediblebytes.com/wp-content/uploads/2014/12/logo.png" alt="<?php echo $settings['sitename'] ?>">
+            <img src="<?php echo uri('modules/site/assets/images/ct21logo.png') ?>" alt="<?php echo $settings['sitename'] ?>">
           </a>
         </div>
 
