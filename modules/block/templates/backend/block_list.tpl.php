@@ -29,7 +29,9 @@
             <td>
         <div class="btn-group">
           <a class="btn btn-default btn-sm" href="<?php echo uri('admin/block/edit/' . $object->getId()); ?>"><i class="fa fa-edit"></i></a>
+          <!--
           <a onclick="return confirm('<?php echo i18n(array('en' => 'Are you sure to delete this record ?', 'zh' => '你确定删除这条记录吗 ?')); ?>');" class="btn btn-default btn-sm" href="<?php echo uri('admin/block/delete/' . $object->getId(), false); ?>"><i class="fa fa-remove"></i></a>
+          -->
         </div>
       </td>
     </tr>

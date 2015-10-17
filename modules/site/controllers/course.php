@@ -14,7 +14,7 @@ $html->renderOut('site/components/html_header', array(
 ));
 
 $html->output('<div id="page-container">');
-$html->renderOut('site/components/toptoolbar');
+//$html->renderOut('site/components/toptoolbar');
 $html->renderOut('site/components/header');
 $html->renderOut('site/course', array(
     'breadcrumb' => $html->render('site/components/breadcrumb', array(
@@ -30,7 +30,8 @@ $html->renderOut('site/course', array(
             $html->render('site/components/sidebar_block_courses', array(
                 'course' => $course
             )),
-            $html->render('site/components/sidebar_block_recent_news')
+            $html->render('site/components/sidebar_block_recent_news'),
+            $html->render('site/components/sidebar_block_apply')
         )
     ))
 ));

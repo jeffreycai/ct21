@@ -14,7 +14,7 @@ $html->renderOut('site/components/html_header', array(
 ));
 
 $html->output('<div id="page-container">');
-$html->renderOut('site/components/toptoolbar');
+//$html->renderOut('site/components/toptoolbar');
 $html->renderOut('site/components/header');
 $html->renderOut('site/page/default', array(
     'breadcrumb' => $html->render('site/components/breadcrumb', array(
@@ -26,7 +26,8 @@ $html->renderOut('site/page/default', array(
     'page' => $page,
     'full_page_sidebar_right' => $html->render('site/components/full_page_sidebar_right', array(
       'blocks' => array(
-          Block::findByName('Get in Touch')
+          Block::findByName('Get in Touch'),
+          Block::findByName('Apply Now')
         )
     ))
 ));

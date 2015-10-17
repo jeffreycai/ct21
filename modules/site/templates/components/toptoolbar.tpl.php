@@ -8,7 +8,7 @@
       </div>
 
     </div>
-<!--
+
     <ul class="toolbar-social">
       <li class="facebook">
         <a target="_blank" title="Facebook" href="https://facebook.com/">
@@ -46,6 +46,5 @@
         </a>
       </li>
     </ul>
--->
   </div>
 </div>

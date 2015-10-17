@@ -9,7 +9,7 @@ $html->renderOut('site/components/html_header', array(
 ));
 
 $html->output('<div id="page-container">');
-$html->renderOut('site/components/toptoolbar');
+//$html->renderOut('site/components/toptoolbar');
 $html->renderOut('site/components/header');
 
 $perpage = $settings['news_per_page'];
@@ -20,6 +20,7 @@ $html->renderOut('site/news', array(
     'sidebar_right' => $html->render('site/components/sidebar_right', array(
         'blocks' => array(
             $html->render('site/components/sidebar_block_countries'),
+            $html->render('site/components/sidebar_block_apply')
 //            $html->render('site/components/sidebar_block_recent_news')
         )
     )),

@@ -14,7 +14,7 @@ $html->renderOut('site/components/html_header', array(
 ));
 
 $html->output('<div id="page-container">');
-$html->renderOut('site/components/toptoolbar');
+//$html->renderOut('site/components/toptoolbar');
 $html->renderOut('site/components/header');
 $html->renderOut('site/institution', array(
     'breadcrumb' => $html->render('site/components/breadcrumb', array(
@@ -30,7 +30,8 @@ $html->renderOut('site/institution', array(
             $html->render('site/components/sidebar_block_institutions', array(
                 'institution' => $institution
             )),
-            $html->render('site/components/sidebar_block_recent_news')
+            $html->render('site/components/sidebar_block_recent_news'),
+            $html->render('site/components/sidebar_block_apply')
         )
     ))
 ));

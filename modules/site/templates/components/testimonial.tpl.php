@@ -9,7 +9,7 @@
       </div>
       <div class="lecturers-grid clearfix">
 <?php $i=0; foreach (Testimonial::findAll() as $testimonial): ?>
-        <div class="lecturer column-<?php echo ($i+1)%2 == 0 ? 2 : 1 ?> <?php echo $i < 3 ? 'first' : 'last' ?>-row">
+        <div class="lecturer column-<?php echo ($i+1)%2 == 0 ? 2 : 1 ?>" <?php if ($i > 3): ?>style="display:none"<?php endif; ?>>
           <div class="author-photo">
             <img width="150" height="150" src="<?php echo uri($testimonial->getImage()) ?>" alt="Testimonial by <?php echo htmlentities($testimonial->getName()) ?>">
           </div>
@@ -22,7 +22,17 @@
           </div>
         </div>
 <?php $i++; endforeach; ?>
-        
-      
       </div>
-    </div></div></section>
+      <div style="text-align: center;">
+        <a id="showmore" href="#" class="button">Show more</a>
+      </div>
+      <script type="text/javascript">
+        $('#showmore').click(function(){
+          $('.lecturer:hidden').fadeIn('slow');
+          $(this).hide();
+          return false;
+        });
+      </script>
+    </div>
+  </div>
+</section>

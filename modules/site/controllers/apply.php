@@ -24,7 +24,7 @@ $html->renderOut('site/components/html_header', array(
 ));
 
 $html->output('<div id="page-container">');
-$html->renderOut('site/components/toptoolbar');
+//$html->renderOut('site/components/toptoolbar');
 $html->renderOut('site/components/header');
 $html->renderOut('site/apply', array(
     'full_page_sidebar_right' => $html->render('site/components/full_page_sidebar_right', array(

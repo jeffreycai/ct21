@@ -4,7 +4,7 @@ require_once "BaseCourse.class.php";
 class Course extends BaseCourse {
   static function findAllByCountryId($cid) {
     global $mysqli;
-    $query = "SELECT * FROM institution WHERE country_id=$cid ORDER BY weight ASC";
+    $query = "SELECT * FROM course WHERE country_id=$cid ORDER BY weight ASC";
     $result = $mysqli->query($query);
     
     $rtn = array();

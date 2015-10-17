@@ -1,3 +1,12 @@
+.widget .button:hover {
+  color: #FFF;
+}
+.widget .button {
+  color: #149dd2;
+}
+.dm3-column-last {
+  margin-bottom: 20px;
+}
 .owl-item .post-grid .entry-title {
   text-align: center;
   border-bottom: none;
@@ -10,6 +19,9 @@
 }
 .owl-item .post-thumb {
   margin: 0;
+}
+.has-toolbar .fixed-header #page-header-inner {
+  top: 0px;
 }
 .post-body .entry-title {
   text-align: left;

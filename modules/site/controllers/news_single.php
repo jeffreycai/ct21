@@ -10,14 +10,15 @@ $html->renderOut('site/components/html_header', array(
 ));
 
 $html->output('<div id="page-container">');
-$html->renderOut('site/components/toptoolbar');
+//$html->renderOut('site/components/toptoolbar');
 $html->renderOut('site/components/header');
 $html->renderOut('site/news_single', array(
     'news' => $news,
     'sidebar_right' => $html->render('site/components/sidebar_right', array(
         'blocks' => array(
             $html->render('site/components/sidebar_block_countries'),
-            $html->render('site/components/sidebar_block_recent_news')
+            $html->render('site/components/sidebar_block_recent_news'),
+            $html->render('site/components/sidebar_block_apply')
         )
     ))
 ));
