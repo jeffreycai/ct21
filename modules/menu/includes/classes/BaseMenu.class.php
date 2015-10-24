@@ -44,6 +44,18 @@ class BaseMenu extends DBObject {
    public function getRootMenuItemId() {
      return $this->getDbFieldRoot_menu_item_id();
    }
+   public function setCountryId($cid) {
+     $this->setDbFieldCountry_id($cid);
+   }
+   public function getCountryId() {
+     return $this->getDbFieldCountry_id();
+   }
+   public function setReserved($var) {
+     $this->setDbFieldReserved($var);
+   }
+   public function getReserved() {
+     return $this->getDbFieldReserved();
+   }
 
   
   

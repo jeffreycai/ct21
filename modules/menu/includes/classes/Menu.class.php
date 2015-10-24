@@ -22,6 +22,19 @@ class Menu extends BaseMenu {
     return null;
   }
   
+  static function findByCountryId($cid) {
+    global $mysqli;
+    $query = 'SELECT * FROM menu WHERE country_id=' . DBObject::prepare_val_for_sql($cid);
+    $result = $mysqli->query($query);
+
+    if ($result && $b = $result->fetch_object()) {
+      $obj = new Menu();
+      DBObject::importQueryResultToDbObject($b, $obj);
+      return $obj;
+    }
+    return null;
+  }
+  
   public function clear() {
     $items = MenuItem::findAllByMenuId($this->getId());
     foreach ($items as $item) {
@@ -29,5 +42,9 @@ class Menu extends BaseMenu {
         $item->delete();
       }
     }
+  }
+  
+  public function getCountry() {
+    return Country::findById($this->getCountryId());
   }
 }

@@ -16,6 +16,11 @@ class Country extends BaseCountry {
       $i->delete();
     }
     
+    // we then delete all menu related to it
+    foreach (Menu::findByCountryId($this->getId()) as $menu) {
+      $menu->delete();
+    }
+    
     return parent::delete();
   }
   

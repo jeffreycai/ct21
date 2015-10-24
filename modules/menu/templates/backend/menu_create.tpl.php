@@ -28,6 +28,17 @@
   </div>
 </div>
 <div class='hr-line-dashed'></div>
+<div class='form-group'>
+  <label class='col-sm-2 control-label' for='country_id'>country</label>
+  <div class='col-sm-10'>
+    <select class="form-control" name="country_id">
+<?php foreach (Country::findAll() as $country): ?>
+      <option value="<?php echo $country->getId() ?>"><?php echo $country->getName() ?></option>
+<?php endforeach; ?>
+    </select>
+  </div>
+</div>
+<div class='hr-line-dashed'></div>
 
   <input type="submit" name="submit" value="<?php i18n_echo(array(
       'en' => 'Create', 

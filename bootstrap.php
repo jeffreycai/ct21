@@ -24,7 +24,8 @@ if (isset($custom_modules)) {
       'carousel',
       'testimonial',
       'page',
-      'menu'
+      'menu',
+      'project'
   );
 
 }

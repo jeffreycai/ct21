@@ -25,6 +25,11 @@ routing:
     isSecure: 1
     i18n: 1
     controller: menu/backend/menu_order
+  admin_menu_assign_country:
+    path: ^\/admin\/menu\/assign_country\/?$
+    isSecure: 1
+    i18n: 1
+    controller: menu/backend/menu_assign_country
 
   admin_menu_item_list:
     path: ^\/admin\/menu_item\/list\/?$

@@ -14,12 +14,30 @@ if (isset($_POST['submit'])) {
     Message::register(new Message(Message::DANGER, i18n(array("en" => "name is required.", "zh" => "请填写name"))));
     $error_flag = true;
   }
+  // validation for country_id
+  $country_id = isset($_POST['country_id']) ? strip_tags($_POST['country_id']) : null;
+
   /// proceed submission
   
   // proceed for $name
   $object->setName($name);
+  // proceed for $country_id
+  $object->setCountryId($country_id);
+  
   if ($error_flag == false) {
     if ($object->save()) {
+      // create root menu_it
+      $menu_item = new MenuItem();
+      $menu_item->setWeight(0);
+      $menu_item->setMenuId($object->getId());
+      $menu_item->setName('root');
+      $menu_item->setParentId(null);
+      $menu_item->setUri('');
+      $menu_item->save();
+      
+      $object->setRootMenuItemId($menu_item->getId());
+      $object->save();
+      
       Message::register(new Message(Message::SUCCESS, i18n(array("en" => "Record saved", "zh" => "记录保存成功"))));
       HTML::forwardBackToReferer();
     } else {

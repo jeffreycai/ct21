@@ -47,10 +47,10 @@ if (isset($_FILES)) {
       try {
         $image = WideImage::load($tmp_location);
         unlink($tmp_location);
-        $refill = "0,0,0";
+        $refill = true;
         $watermark = WEBROOT . DS . 'modules/site/assets/images/favicon.png';
         if ($refill) {
-          $bgcolor = $image->allocateColor(0,0,0);
+          $bgcolor = $image->allocateColor(255,255,255);
           $image = $image->resize(500, 320, 'inside')->resizeCanvas(500, 320, 'center', 'center', $bgcolor);
         } else {
           $image = $image->resize(500, 320, 'outside')->resizeCanvas(500, 320, 'center', 'center');

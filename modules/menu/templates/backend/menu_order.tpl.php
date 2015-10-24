@@ -223,7 +223,29 @@ $(function  () {
       'zh' => '添加'
   )) ?>" class="btn btn-default">
 </form>
-          
+
+<?php if ($menu->getReserved() != 1): ?>
+<h3>Assign country</h3>
+<form class="form-horizontal" role="form" method="POST" action="<?php echo uri('admin/menu/assign_country') ?>">
+  <div class='form-group'>
+    <label class='col-sm-2 control-label' for='country_id'>country</label>
+    <div class='col-sm-10'>
+      <select class='form-control' name="country_id">
+        <option value="0">-- select --</option>
+<?php foreach (Country::findAll() as $country): ?>
+        <option value="<?php echo $country->getId() ?>" <?php echo $menu->getCountryId() == $country->getId() ? 'selected' : '' ?>><?php echo $country->getName() ?></option>
+<?php endforeach; ?>
+      </select>
+    </div>
+  </div>
+  <div class='hr-line-dashed'></div>
+  <input type="hidden" name="menu_id" value="<?php echo $menu->getId() ?>" />
+    <input type="submit" name="submit" value="<?php i18n_echo(array(
+        'en' => 'Assign', 
+        'zh' => '指派'
+    )) ?>" class="btn btn-default">
+</form>
+<?php endif; ?>
         </div>
       </div>
     </div>

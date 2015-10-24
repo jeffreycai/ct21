@@ -40,7 +40,7 @@ news:
           multiple: 0
           upload_dir: files/news/image
           transform:
-            dimension: 360x224
+            dimension: 480x300
       date:
         widget: datepicker
         widget_conf:

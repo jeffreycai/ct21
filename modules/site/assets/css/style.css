@@ -7,6 +7,9 @@
 .dm3-column-last {
   margin-bottom: 20px;
 }
+.fw-slider .caption-inner {
+  max-width: 80%;
+}
 .owl-item .post-grid .entry-title {
   text-align: center;
   border-bottom: none;
@@ -51,9 +54,9 @@
 .news {
   position: relative;
   padding: 20px 0;
-  height: 100px;
+  /*height: 100px;*/
   top: -20px;
-  overflow: hidden;
+  /*overflow: hidden;*/
   border-bottom: dotted #AAA 1px;
 }
 .news.last {

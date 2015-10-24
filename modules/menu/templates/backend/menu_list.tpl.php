@@ -18,20 +18,22 @@
 <table class="table table-striped table-bordered table-hover dataTable no-footer">
   <thead>
       <tr role="row">
-                <th>id</th>
                 <th>name</th>
+                <th>country</th>
                 <th>Actions</th>
       </tr>
   </thead>
   <tbody>
     <?php foreach ($objects as $object): ?>
     <tr>
-            <td><?php echo $object->getId() ?></td>
             <td><?php echo $object->getName() ?></td>
+            <td><?php $country = Country::findById($object->getCountryId()); echo $country ? $country->getName() : 'N/A' ?></td>
             <td>
         <div class="btn-group">
           <a class="btn btn-default btn-sm" href="<?php echo uri('admin/menu/order/' . $object->getId()); ?>"><i class="fa fa-edit"></i></a>
-          <!--<a onclick="return confirm('<?php echo i18n(array('en' => 'Are you sure to delete this record ?', 'zh' => '你确定删除这条记录吗 ?')); ?>');" class="btn btn-default btn-sm" href="<?php echo uri('admin/menu/delete/' . $object->getId(), false); ?>"><i class="fa fa-remove"></i></a>-->
+          <?php if ($object->getReserved() != 1): ?>
+          <a onclick="return confirm('<?php echo i18n(array('en' => 'Are you sure to delete this record ?', 'zh' => '你确定删除这条记录吗 ?')); ?>');" class="btn btn-default btn-sm" href="<?php echo uri('admin/menu/delete/' . $object->getId(), false); ?>"><i class="fa fa-remove"></i></a>
+          <?php endif; ?>
         </div>
       </td>
     </tr>

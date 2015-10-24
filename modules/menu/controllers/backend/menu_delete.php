@@ -5,7 +5,9 @@ $object = Menu::findById($id);
 
 $error_flag = false;
 if ($object) {
-  if ($object->delete()) {
+  if ($object->getReserved()) {
+    $error_flag = true;
+  } else if ($object->delete()) {
     Message::register(new Message(Message::SUCCESS, i18n(array(
       'en' => 'Record deleted',
       'zh' => '记录删除成功'

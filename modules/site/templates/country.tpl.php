@@ -41,6 +41,17 @@
 <?php endif; ?>
       
       
+<?php $menu = Menu::findByCountryId($country->getId()); if ($menu): ?>
+      <div class="sub-section">
+        <h2><?php echo $menu->getName() ?></h2>
+        <ul class="highlight-list">
+<?php foreach ($menu->getRootItem(10)->getChildren() as $item): ?>
+          <li><i class="fa fa-book"></i> <a href="<?php echo strpos($item->getUri(), 'http') === 0 ? $item->getUri() : uri($item->getUri()) ?>"><?php echo $item->getName(); ?></a></li>
+<?php endforeach; ?>
+        </ul>
+      </div>
+<?php endif; ?>
+      
     </div>
 
     <?php echo $sidebar_right; ?>

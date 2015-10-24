@@ -47,13 +47,13 @@ if (isset($_FILES)) {
       try {
         $image = WideImage::load($tmp_location);
         unlink($tmp_location);
-        $refill = false;
+        $refill = true;
         $watermark = false;
         if ($refill) {
-          $bgcolor = $image->allocateColor(0);
-          $image = $image->resize(360, 224, 'inside')->resizeCanvas(360, 224, 'center', 'center', $bgcolor);
+          $bgcolor = $image->allocateColor(255,255,255);
+          $image = $image->resize(480, 300, 'inside')->resizeCanvas(480, 300, 'center', 'center', $bgcolor);
         } else {
-          $image = $image->resize(360, 224, 'outside')->resizeCanvas(360, 224, 'center', 'center');
+          $image = $image->resize(480, 300, 'outside')->resizeCanvas(480, 300, 'center', 'center');
         }
 
         if ($watermark) {
