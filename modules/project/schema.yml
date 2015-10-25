@@ -12,6 +12,7 @@ project:
     price: DECIMAL(6) DEFAULT 0
     images: VARCHAR(800)
     thumbnail: VARCHAR(100)
+    attachment: VARCHAR(1000)
   form:
     fields:
       title:
@@ -75,8 +76,15 @@ project:
           multiple: 0
           upload_dir: files/fields/thumbnail
           transform: 0
-
-            
+      attachment:
+        widget: plupfile
+        widget_conf:
+          required: 1
+          multiple: 2
+          upload_dir: files/plupfiletest
+          # max_file_size in mb
+          max_file_size: 4
+          extensions: jpg,png,gif,zip
             
           
         

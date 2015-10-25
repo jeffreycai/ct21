@@ -32,11 +32,11 @@ if (isset($_FILES)) {
           'en' => 'Upload file needs to be an image file',
           'zh' => '上传文件需为图片文件'
       ));
-    } else if ($size > (1 * 1000 * 1000)) {
+    } else if ($size > (4 * 1000 * 1000)) {
       $error_msg = i18n(array(
           'en' => 'Max upload file size should be less than',
           'zh' => '最大上传文件应小于'
-      )) . ' 1MB';
+      )) . ' 4MB';
     }
     if ($error_msg) {
       $rtn->error = $error_msg;
@@ -47,10 +47,10 @@ if (isset($_FILES)) {
       try {
         $image = WideImage::load($tmp_location);
         unlink($tmp_location);
-        $refill = true;
+        $refill = "0,0,0";
         $watermark = WEBROOT . DS . 'modules/site/assets/images/favicon.png';
         if ($refill) {
-          $bgcolor = $image->allocateColor(255,255,255);
+          $bgcolor = $image->allocateColor(0,0,0);
           $image = $image->resize(500, 320, 'inside')->resizeCanvas(500, 320, 'center', 'center', $bgcolor);
         } else {
           $image = $image->resize(500, 320, 'outside')->resizeCanvas(500, 320, 'center', 'center');

@@ -49,3 +49,8 @@ function loadCSS(filename) {
   if (typeof file !== "undefined")
     document.head.appendChild(file)
 }
+
+
+function htmlEntities(str) {
+  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}

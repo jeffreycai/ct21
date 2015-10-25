@@ -84,6 +84,13 @@ if (isset($_POST['submit'])) {
     Message::register(new Message(Message::DANGER, i18n(array("en" => "thumbnail is required.", "zh" => "请填写thumbnail"))));
     $error_flag = true;
   }
+  
+  // validation for $attachment
+  $attachment = isset($_POST["attachment"]) ? strip_tags(trim($_POST["attachment"])) : null;
+  if (empty($attachment)) {
+    Message::register(new Message(Message::DANGER, i18n(array("en" => "attachment is required.", "zh" => "请填写attachment"))));
+    $error_flag = true;
+  }
   /// proceed submission
   
   // proceed for $title
@@ -105,7 +112,7 @@ if (isset($_POST['submit'])) {
   $object->setActive($active);
   
   // proceed for $owners
- // TODO
+  $object->setOwners(implode(";", $owners));
   
   // proceed for $price
   if (!empty($price)) {
@@ -117,6 +124,9 @@ if (isset($_POST['submit'])) {
   
   // proceed for $thumbnail
   $object->setThumbnail($thumbnail);
+  
+  // proceed for $attachment
+  $object->setAttachment($attachment);
   if ($error_flag == false) {
     if ($object->save()) {
       Message::register(new Message(Message::SUCCESS, i18n(array("en" => "Record saved", "zh" => "记录保存成功"))));

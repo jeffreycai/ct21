@@ -708,7 +708,9 @@ function build_form($model, $override = false) {
           // build field controllers
           foreach ($form_fields as $name => $field) {
             $widget_conf = $field['widget_conf'];
-            // image field controllers
+            
+            
+            /** image field controllers **/
             if ($field['widget'] == 'image') {
               // image submission controller
               $upload_dir = $widget_conf['upload_dir'];
@@ -742,6 +744,53 @@ function build_form($model, $override = false) {
                 echo " > module $module: controller '".$model."_form_field_$name"."_remove.php' exists. skip\n";
               }
             }
+            
+            
+            /** plupfile field controllers **/
+            if ($field['widget'] == 'plupfile') {
+              // plupfile submission controller
+              $upload_dir = $widget_conf['upload_dir'];
+              $file_extensions = $widget_conf['extensions'];
+
+              if ($override || !is_file($module_path . DS . 'controllers' . DS . 'backend' . DS . $model."_form_field_$name.php")) {
+                echo " + module $module: create form field controller '".$model."_form_field_$name.php'\n";
+
+                ob_start();
+                require (MODULESROOT . DS . 'core' . DS . 'controllers' . DS . 'backend' . DS . "form_field_plupfile.template.php");
+                $content = "<?php\n" . ob_get_clean();
+                file_put_contents($module_path . DS . 'controllers' . DS . 'backend' . DS . $model."_form_field_$name.php", $content);
+              } else {
+                echo " > module $module: controller '".$model."_form_field_$name.php' exists. skip\n";
+              }
+              
+              // plupfile remove controller
+              if ($override || !is_file($module_path . DS . 'controllers' . DS . 'backend' . DS . $model."_form_field_$name"."_remove.php")) {
+                echo " + module $module: create form field remove controller '".$model."_form_field_$name"."_remove.php'\n";
+
+                ob_start();
+                require (MODULESROOT . DS . 'core' . DS . 'controllers' . DS . 'backend' . DS . "form_field_plupfile_remove.template.php");
+                $content = "<?php\n" . ob_get_clean();
+                file_put_contents($module_path . DS . 'controllers' . DS . 'backend' . DS . $model."_form_field_$name"."_remove.php", $content);
+              } else {
+                echo " > module $module: controller '".$model."_form_field_$name"."_remove.php' exists. skip\n";
+              }
+              
+              //plupfile upload controller
+              if ($override || !is_file($module_path . DS . 'controllers' . DS . 'backend' . DS . $model."_form_field_$name"."_upload.php")) {
+                echo " + module $module: create form field upload controller '".$model."_form_field_$name"."_upload.php'\n";
+
+                ob_start();
+                require (MODULESROOT . DS . 'core' . DS . 'controllers' . DS . 'backend' . DS . "form_field_plupfile_upload.template.php");
+                $content = "<?php\n" . ob_get_clean();
+                file_put_contents($module_path . DS . 'controllers' . DS . 'backend' . DS . $model."_form_field_$name"."_upload.php", $content);
+              } else {
+                echo " > module $module: controller '".$model."_form_field_$name"."_upload.php' exists. skip\n";
+              }
+            }
+            
+            
+            
+            
           }
         }
         return;

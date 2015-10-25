@@ -19,72 +19,118 @@
           
         <?php echo Message::renderMessages(); ?>
           
-<form role="form" method="POST" action="<?php echo uri('admin/project/create') ?>">
+<form class="form-horizontal" role="form" method="POST" action="<?php echo uri('admin/project/create') ?>">
   
 <div class='form-group'>
-  <label for='title'>title</label>
-  <input value='<?php echo ($object->isNew() ? (isset($_POST['title']) ? strip_tags($_POST['title']) : '') : $object->getTitle()) ?>' type='text' class='form-control' id='title' name='title' required size=150 />
+  <label class='col-sm-2 control-label' for='title'>title <span style="color: rgb(185,2,0); font-weight: bold;">*</span></label>
+  <div class='col-sm-10'>
+    <input value='<?php echo htmlentities(str_replace('\'', '"', ($object->isNew() ? (isset($_POST['title']) ? strip_tags($_POST['title']) : '') : $object->getTitle()))) ?>' type='text' class='form-control' id='title' name='title' required size=150 />
+  </div>
 </div>
+<div class='hr-line-dashed'></div>
   
 <div class='form-group'>
-  <label for='password'>password</label>
-  <input type='password' class='form-control' id='password' name='password' required size=15 />
+  <label class='col-sm-2 control-label' for='password'>password <span style="color: rgb(185,2,0); font-weight: bold;">*</span></label>
+  <div class='col-sm-10'>
+    <input type='password' class='form-control' id='password' name='password' required size=15 />
+  </div>
 </div>
 <div class='form-group'>
-  <label for='retype_password'><?php echo i18n(array('en' => 'Retype', 'zh' => '再输一次')) ?> password</label>
-  <input type='password' class='form-control' id='retype_password' name='retype_password' required size=15 />
+  <label class='col-sm-2 control-label' for='retype_password'><?php echo i18n(array('en' => 'Retype', 'zh' => '再输一次')) ?> password <span style="color: rgb(185,2,0); font-weight: bold;">*</span></label>
+  <div class='col-sm-10'>
+    <input type='password' class='form-control' id='retype_password' name='retype_password' required size=15 />
+  </div>
 </div>
+<div class='hr-line-dashed'></div>
   
 <div class='form-group'>
-  <label for='email'>email</label>
-  <input value='<?php echo ($object->isNew() ? (isset($_POST['email']) ? strip_tags($_POST['email']) : '') : $object->getEmail()) ?>' type='email' class='form-control' id='email' name='email' required size=30 />
+  <label class='col-sm-2 control-label' for='email'>email <span style="color: rgb(185,2,0); font-weight: bold;">*</span></label>
+  <div class='col-sm-10'>
+    <input value='<?php echo htmlentities(str_replace('\'', '"', ($object->isNew() ? (isset($_POST['email']) ? strip_tags($_POST['email']) : '') : $object->getEmail()))) ?>' type='email' class='form-control' id='email' name='email' required size=30 />
+  </div>
 </div>
 <div class='form-group'>
-  <label for='retype_email'><?php echo i18n(array('en' => 'Retype', 'zh' => '再输一次')) ?> email</label>
-  <input value='<?php echo (isset($_POST['retype_email']) ? strip_tags($_POST['retype_email']) : '') ?>' type='email' class='form-control' id='retype_email' name='retype_email' required size=30 />
+  <label class='col-sm-2 control-label' for='retype_email'><?php echo i18n(array('en' => 'Retype', 'zh' => '再输一次')) ?> email <span style="color: rgb(185,2,0); font-weight: bold;">*</span></label>
+  <div class='col-sm-10'>
+    <input value='<?php echo htmlentities(str_replace('\'', '"', (isset($_POST['retype_email']) ? strip_tags($_POST['retype_email']) : ''))) ?>' type='email' class='form-control' id='retype_email' name='retype_email' required size=30 />
+  </div>
 </div>
+<div class='hr-line-dashed'></div>
   
 <div class='form-group'>
-  <label for='description_en'>description_en</label>
-  <textarea class='form-control' rows='5' id='description_en' name='description_en'><?php echo ($object->isNew() ? (isset($_POST['description_en']) ? htmlentities($_POST['description_en']) : '') : htmlentities($object->getDescriptionEn())) ?></textarea>
+  <label class='col-sm-2 control-label' for='description_en'>description_en </label>
+  <div class='col-sm-10'>
+    <textarea class='form-control' rows='5' id='description_en' name='description_en'><?php echo ($object->isNew() ? (isset($_POST['description_en']) ? htmlentities($_POST['description_en']) : '') : htmlentities($object->getDescriptionEn())) ?></textarea>
+  </div>
 </div>
+<div class='hr-line-dashed'></div>
 
 <script type='text/javascript' src='/libraries/ckeditor/ckeditor.js'></script>
-<script type='text/javascript'>CKEDITOR.replace('description_en');</script>  
+<script type='text/javascript'>CKEDITOR.replace('description_en', {
+  toolbar: [
+    { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat' ] },
+    { name: 'paragraph', groups: [ 'list', 'indent', 'align' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ] },
+    { name: 'links', items: [ 'Link', 'Unlink' ] },
+    { name: 'insert', items: [ 'Image', 'Table', 'HorizontalRule', 'Iframe' ] },
+    '/',
+    { name: 'styles', items: [ 'Format', 'Font', 'FontSize' ] },
+    { name: 'colors', items: [ 'TextColor' ] },
+    { name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
+    { name: 'tools', items: [ 'Maximize' ] }
+  ]
+}
+);</script>  
 <div class='form-group'>
-  <label for='description_zh'>description_zh</label>
-  <textarea class='form-control' rows='5' id='description_zh' name='description_zh' required><?php echo ($object->isNew() ? (isset($_POST['description_zh']) ? htmlentities($_POST['description_zh']) : '') : htmlentities($object->getDescriptionZh())) ?></textarea>
+  <label class='col-sm-2 control-label' for='description_zh'>description_zh <span style="color: rgb(185,2,0); font-weight: bold;">*</span></label>
+  <div class='col-sm-10'>
+    <textarea class='form-control' rows='5' id='description_zh' name='description_zh' required><?php echo ($object->isNew() ? (isset($_POST['description_zh']) ? htmlentities($_POST['description_zh']) : '') : htmlentities($object->getDescriptionZh())) ?></textarea>
+  </div>
 </div>
+<div class='hr-line-dashed'></div>
   
-<div class='checkbox'>
-  <label>
-    <input type='checkbox' <?php echo ($object->isNew() ? (isset($_POST['active']) ? ($_POST['active'] ? 'checked="checked"' : '') : '') : ($object->getActive() ? "checked='checked'" : "")) ?> id='active' name='active' value='1' /> active
+<div class='form-group'>
+  <label class='col-sm-2 control-label'>
+    active
   </label>
+  <div class='col-sm-10'>
+    <input type='checkbox' <?php echo ($object->isNew() ? (isset($_POST['active']) ? ($_POST['active'] ? 'checked="checked"' : '') : '') : ($object->getActive() ? "checked='checked'" : "")) ?> id='active' name='active' value='1' />
+  </div>
 </div>
+<div class='hr-line-dashed'></div>
   
+       <?php $items = ($object->isNew() ? (isset($_POST['owners']) ? explode(';', $_POST['owners']) : '') : explode(';', $object->getOwners() )) ?>
 <div class='form-group'>
-  <label>owners</label>
+  <label class='col-sm-2 control-label'>owners <span style="color: rgb(185,2,0); font-weight: bold;">*</span></label>
+  <div class='col-sm-10'>
     <div class='checkbox'>
-      <label><input type='checkbox' name='owners[]' value='jack' /> Jack</label>
-      <label><input type='checkbox' name='owners[]' value='sue' /> Sue</label>
+      <label><input type='checkbox' <?php if (in_array('Jack', $items)): ?>checked='checked'<?php endif; ?> name='owners[]' value='jack' /> Jack</label>
+      <label><input type='checkbox' <?php if (in_array('Sue', $items)): ?>checked='checked'<?php endif; ?> name='owners[]' value='sue' /> Sue</label>
     </div>
+  </div>
 </div>
+<div class='hr-line-dashed'></div>
   
 <div class='form-group'>
-  <label>price</label>
+  <label class='col-sm-2 control-label'>price </label>
+  <div class='col-sm-10'>
     <select class='form-control' id='price' name='price'>
       <option value='0' <?php echo ($object->isNew() ? (isset($_POST['price']) ? ($_POST['price'] == '0' ? 'selected="selected"' : '') : '') : ($object->getPrice() == "0" ? "selected='selected'" : "")) ?>>-- Select --</option>
       <option value='34' <?php echo ($object->isNew() ? (isset($_POST['price']) ? ($_POST['price'] == '34' ? 'selected="selected"' : '') : '') : ($object->getPrice() == "34" ? "selected='selected'" : "")) ?>>$34</option>
       <option value='45' <?php echo ($object->isNew() ? (isset($_POST['price']) ? ($_POST['price'] == '45' ? 'selected="selected"' : '') : '') : ($object->getPrice() == "45" ? "selected='selected'" : "")) ?>>$45</option>
     </select>
+  </div>
 </div>
+<div class='hr-line-dashed'></div>
   
 <div class='form-group' id='images'>
-  <label>images</label>
-  <textarea name='images' style='display: none;'></textarea>
-  <div class='file-fields' style='border: 1px solid #999; padding: 6px;'></div>
+  <label class='col-sm-2 control-label'>images </label>
+  <div class='col-sm-10'>
+    <textarea name='images' style='display: none;'></textarea>
+    <div class='file-fields' style='border: 1px solid #999; padding: 6px;'></div>
   <button style='margin-top:6px;' class='add btn btn-primary btn-sm' type='button'><?php echo i18n(array('en' => 'Add image', 'zh' => '添加图片')) ?></button>
+  </div>
 </div>
+<div class='hr-line-dashed'></div>
 
 <?php
   // get json string of prepopulated image links
@@ -134,8 +180,8 @@
       var file = this.files[0];
       if (!file.type.match(/^image/)) {
         alert('<?php echo i18n(array('en' => 'Upload file needs to be an image file', 'zh' => '上传文件需为图片文件')) ?>');
-      } else if (file.size > (1 * 1000 * 1000)) {
-        alert('<?php echo i18n(array('en' => 'File size should be less than', 'zh' => '文件大小应小于')) . ' 2MB' ?>');
+      } else if (file.size > (4 * 1000 * 1000)) {
+        alert('<?php echo i18n(array('en' => 'File size should be less than', 'zh' => '文件大小应小于')) . ' 4MB' ?>');
       } else {
         var reader = new FileReader();
         reader.onload = (function(e){
@@ -256,11 +302,14 @@ tr.fadeOut();
 </script>
   
 <div class='form-group' id='thumbnail'>
-  <label>thumbnail</label>
-  <textarea name='thumbnail' style='display: none;'></textarea>
-  <div class='file-fields'></div>
+  <label class='col-sm-2 control-label'>thumbnail <span style="color: rgb(185,2,0); font-weight: bold;">*</span></label>
+  <div class='col-sm-10'>
+    <textarea name='thumbnail' style='display: none;'></textarea>
+    <div class='file-fields'></div>
 
+  </div>
 </div>
+<div class='hr-line-dashed'></div>
 
 <?php
   // get json string of prepopulated image links
@@ -304,8 +353,8 @@ tr.fadeOut();
       var file = this.files[0];
       if (!file.type.match(/^image/)) {
         alert('<?php echo i18n(array('en' => 'Upload file needs to be an image file', 'zh' => '上传文件需为图片文件')) ?>');
-      } else if (file.size > (1 * 1000 * 1000)) {
-        alert('<?php echo i18n(array('en' => 'File size should be less than', 'zh' => '文件大小应小于')) . ' 2MB' ?>');
+      } else if (file.size > (4 * 1000 * 1000)) {
+        alert('<?php echo i18n(array('en' => 'File size should be less than', 'zh' => '文件大小应小于')) . ' 4MB' ?>');
       } else {
         var reader = new FileReader();
         reader.onload = (function(e){
@@ -418,6 +467,155 @@ tr.html(addImageRow(false, true));
         // remove subroot
         var subroot = '<?php echo get_sub_root() ?>';
         uri = uri.substr(subroot.length+1, uri.length-1);
+        html = html + uri + "\n";
+      });
+      $('textarea', container).val(html);
+    }
+  });
+</script>
+  
+<div class='form-group' id='attachment'>
+  <label class='col-sm-2 control-label'>attachment <span style="color: rgb(185,2,0); font-weight: bold;">*</span></label>
+  <div class='col-sm-10'>
+    <textarea name='attachment' style='display: none;'></textarea>
+    <div class='uploaded' style='margin-bottom: 10px;'>
+<?php $files = trim($object->getAttachment(), "\n\r"); ?>
+<?php if (!empty($files)): ?>
+  <?php $files = explode("\n", $files); ?>
+  <?php foreach ($files as $file): ?>
+  <div class='entry'><a class='download' data-path="<?php echo htmlentities($file) ?>\ href='<?php echo uri("$file", false) ?>'><?php echo basename($file); ?></a> &nbsp;&nbsp;<a style="color:red" href="#" data-path="<?php echo htmlentities($file) ?>" class='delete'><i class='fa fa-remove'></i></a></div>
+  <?php endforeach; ?>
+<?php endif; ?>
+    </div>
+    <div class='file-fields' style='border: 1px solid #999; padding: 6px;'>
+      <?php echo i18n(array(
+        'en' => 'File upload requires Flash, Silverlight or HTML5 support. Your browser does not have any of them :(',
+        'zh' => '文件上传需要您的浏览器支持Flash, Silverlight 或者 HTML5。 您的浏览器都不支持 :('
+      ));?>
+    </div>
+    <div class='filecontainer'>
+      <button style='margin-top:6px;' class='browse btn btn-primary btn-sm' type='button'><?php echo i18n(array('en' => 'Select file', 'zh' => '选择文件')) ?></button>
+      <button style='margin-top:6px;' class='upload btn btn-success btn-sm' type='button'><?php echo i18n(array('en' => 'Upload', 'zh' => '上传')) ?></button>
+      <p>
+        <small style='font-style:italic;'>
+          Max file upload size: 4 MB<br />
+          Allowed file type: jpg,png,gif,zip
+        </small>
+      </p>
+    </div>
+  </div>
+</div>
+<div class='hr-line-dashed'></div>
+
+<?php
+  // get json string of prepopulated image links
+  $prepopulate = $object->isNew() ? '' : $object->getAttachment();
+  if ($prepopulate != '') {
+    $tokens = explode("\n", trim($prepopulate));
+    $prepopulate = array();
+    foreach ($tokens as $token) {
+      $prepopulate[] = trim($token, "\n\r");
+    }
+  }
+?>
+
+<script src='/modules/core/assets/plupload/js/plupload.full.min.js'></script>
+
+<script type='text/javascript'>
+  $(function(){
+
+    // initialize uploader
+    var uploader = new plupload.Uploader({
+      runtimes : 'html5,flash,silverlight,html4',
+      browse_button : $('#attachment .filecontainer .browse')[0], // you can pass an id...
+      container: $('#attachment .filecontainer')[0], // ... or DOM Element itself
+      url : '/modules/project/controllers/backend/project_form_field_attachment_upload.php',
+      flash_swf_url : '/modules/core/assets/plupload/js/Moxie.swf',
+      silverlight_xap_url : '/modules/core/assets/plupload/js/Moxie.xap',
+
+      filters : {
+        max_file_size : '4mb',
+        mime_types: [
+          {title : "Allowed files", extensions : "jpg,png,gif,zip"},
+        ]
+      },
+
+      init: {
+        PostInit: function() {
+          $('#attachment .file-fields')[0].innerHTML = '';
+
+          $('#attachment .upload')[0].onclick = function() {
+            uploader.start();
+            return false;
+          };
+        },
+
+        FilesAdded: function(up, files) {
+          
+          
+          var maxfiles = 2;
+          if(up.files.length > maxfiles ) {
+              up.splice(maxfiles);
+              alert('no more than '+maxfiles + ' file(s)');
+          } else {
+            plupload.each(files, function(file) {
+                        $('#attachment .file-fields')[0].innerHTML += '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
+                      });
+          }
+          if (up.files.length === maxfiles) {
+              $('#attachment .browse').addClass('');
+          }
+        },
+
+        UploadProgress: function(up, file) {
+          document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
+        },
+
+        Error: function(up, err) {
+          alert('Error #' + err.code + ': ' + err.message);
+        },
+        
+        FileUploaded: function(uploader, file, response) {
+          var msg = typeof response.response == 'string' ? JSON.parse(response.response) : response.response;
+          if (response.status != 200) {
+            $('#' + file.id).fadeOut();
+            alert('File upload error: wrong status code -  ' + response.status.toString());
+          } else {
+             if (msg.error !== undefined) {
+              $('#' + file.id).fadeOut();
+              alert(msg.error);
+            } else {
+              $('#attachment .uploaded').append('<div id="file_'+Math.round((Math.random()*10000+1)).toString()+'" class="entry"><a href="" data-path="'+msg.filepath+'" class="download">' + file.name + '</a> &nbsp;&nbsp;<a class="delete" data-path="'+msg.filepath+'" style="color:red;" href="#"><i class="fa fa-remove"></i></a></div>');
+              updateHiddenTextarea($('#attachment'));
+            }
+          }
+
+        }
+      }
+    });
+    uploader.init();
+    
+    // file delete action
+    $('#attachment').on('click', '.entry .delete', function(){
+      var id = $(this).parent().attr('id');
+      $.post(
+        "/modules/project/controllers/backend/project_form_field_attachment_remove.php",
+        'path='+$(this).data('path')+'&id='+id,
+        function(data) {
+          if (data.error !== undefined) {
+            alert(data.error);
+          }
+          $('#'+data.id).remove();
+          updateHiddenTextarea($('#attachment'));
+        }, 'json'
+      );
+      return false;
+    });
+
+    function updateHiddenTextarea(container) {
+      var html = '';
+      $('.uploaded .entry a.download', container).each(function(){
+        var uri = $(this).data('path');
         html = html + uri + "\n";
       });
       $('textarea', container).val(html);
