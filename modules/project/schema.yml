@@ -13,6 +13,7 @@ project:
     images: VARCHAR(800)
     thumbnail: VARCHAR(100)
     attachment: VARCHAR(1000)
+    date: INT
   form:
     fields:
       title:
@@ -85,7 +86,16 @@ project:
           # max_file_size in mb
           max_file_size: 4
           extensions: jpg,png,gif,zip
-            
+      date:
+        widget: datepicker
+        widget_conf:
+          required: 1
+          options:
+            dateFormat: '@'
+            altFormat: 'yy-mm-dd'
+            changeMonth: true
+            changeYear: true
+            yearRange: "c-5:c+10"
           
         
     names:

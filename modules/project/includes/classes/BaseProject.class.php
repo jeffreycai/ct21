@@ -15,6 +15,7 @@ include_once MODULESROOT . DS . 'core' . DS . 'includes' . DS . 'classes' . DS .
  * - images
  * - thumbnail
  * - attachment
+ * - date
  */
 class BaseProject extends DBObject {
   /**
@@ -119,6 +120,12 @@ class BaseProject extends DBObject {
    public function getAttachment() {
      return $this->getDbFieldAttachment();
    }
+   public function setDate($var) {
+     $this->setDbFieldDate($var);
+   }
+   public function getDate() {
+     return $this->getDbFieldDate();
+   }
 
   
   
@@ -151,6 +158,7 @@ CREATE TABLE IF NOT EXISTS `project` (
   `images` VARCHAR(800) ,
   `thumbnail` VARCHAR(100) ,
   `attachment` VARCHAR(1000) ,
+  `date` INT ,
   PRIMARY KEY (`id`)
 )
 ENGINE = InnoDB

@@ -228,3 +228,6 @@
   font-weight: normal;
   text-transform: capitalize;
 }
+.form-group {
+  margin-bottom: 10px;
+}

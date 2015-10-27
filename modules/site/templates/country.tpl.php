@@ -10,6 +10,35 @@
           <?php echo $country->getContent() ?>
         </div>
       </article>
+      
+      
+<?php foreach (Menu::findAllByCountryId($country->getId()) as $menu): ?>
+      <div class="sub-section">
+        <h2><?php echo $menu->getName() ?></h2>
+        <ul class="highlight-list">
+<?php foreach ($menu->getRootItem(10)->getChildren() as $item): ?>
+          <li><i class="fa fa-book"></i> <a href="<?php echo strpos($item->getUri(), 'http') === 0 ? $item->getUri() : uri($item->getUri()) ?>"><?php echo $item->getName(); ?></a></li>
+<?php endforeach; ?>
+        </ul>
+      </div>
+<?php endforeach; ?>
+      
+      
+      
+<?php if (sizeof($courses)): ?>
+      <div id="institutions" class="sub-section">
+        <h2>Recommended Courses</h2>
+        <ul class="highlight-list">
+<?php foreach ($courses as $c): ?>
+          <li><i class="fa fa-book"></i> <a href="<?php echo uri('course/' . $c->getId()) ?>">
+ <?php echo $c->getTitle() ?></a></li>
+<?php endforeach; ?>
+        </ul>
+      </div>
+<?php endif; ?>
+      
+      
+      
 <?php if (sizeof($institutions)): ?>
       <div id="institutions" class="sub-section">
         <h2>Recommended Institutions</h2>
@@ -28,29 +57,8 @@
       
       
       
-<?php if (sizeof($courses)): ?>
-      <div id="institutions" class="sub-section">
-        <h2>Recommended Courses</h2>
-        <ul class="highlight-list">
-<?php foreach ($courses as $c): ?>
-          <li><i class="fa fa-book"></i> <a href="<?php echo uri('course/' . $c->getId()) ?>">
- <?php echo $c->getTitle() ?></a></li>
-<?php endforeach; ?>
-        </ul>
-      </div>
-<?php endif; ?>
+
       
-      
-<?php $menu = Menu::findByCountryId($country->getId()); if ($menu): ?>
-      <div class="sub-section">
-        <h2><?php echo $menu->getName() ?></h2>
-        <ul class="highlight-list">
-<?php foreach ($menu->getRootItem(10)->getChildren() as $item): ?>
-          <li><i class="fa fa-book"></i> <a href="<?php echo strpos($item->getUri(), 'http') === 0 ? $item->getUri() : uri($item->getUri()) ?>"><?php echo $item->getName(); ?></a></li>
-<?php endforeach; ?>
-        </ul>
-      </div>
-<?php endif; ?>
       
     </div>
 

@@ -22,17 +22,18 @@ class Menu extends BaseMenu {
     return null;
   }
   
-  static function findByCountryId($cid) {
+  static function findAllByCountryId($cid) {
     global $mysqli;
     $query = 'SELECT * FROM menu WHERE country_id=' . DBObject::prepare_val_for_sql($cid);
     $result = $mysqli->query($query);
 
-    if ($result && $b = $result->fetch_object()) {
-      $obj = new Menu();
+    $rtn = array();
+    while ($result && $b = $result->fetch_object()) {
+      $obj= new Menu();
       DBObject::importQueryResultToDbObject($b, $obj);
-      return $obj;
+      $rtn[] = $obj;
     }
-    return null;
+    return $rtn;
   }
   
   public function clear() {

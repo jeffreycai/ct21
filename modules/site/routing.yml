@@ -25,11 +25,16 @@ routing:
     isSecure: 0
     i18n: 0
     controller: site/news_single
-  apply_now:
-    path: ^\/apply\/?$
+#  apply:
+#    path: ^\/apply\/?$
+#    isSecure: 0
+#    i18n: 0
+#    controller: site/apply
+  apply_form:
+    path: ^\/apply\-form\/?$
     isSecure: 0
     i18n: 0
-    controller: site/apply
+    controller: site/apply_form
   institution:
     path: ^\/institution\/(\d+)\/?$
     isSecure: 0

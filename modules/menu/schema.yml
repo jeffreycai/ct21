@@ -3,7 +3,7 @@ menu:
   fields:
     id: INT NOT NULL AUTO_INCREMENT
     country_id: INT
-    name: VARCHAR(31) NOT NULL
+    name: VARCHAR(255) NOT NULL
     root_menu_item_id: INT DEFAULT NULL
     reserved: TINYINT DEFAULT 0
   indexes:
