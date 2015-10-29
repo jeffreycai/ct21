@@ -13,6 +13,21 @@ class FormWidgetDatepicker extends FormWidget {
     $this->options = $conf['options'];
   }
   
+  static function bootstrap() {
+    // include libs
+    $whichend = is_backend() ? 'backend' : 'frontend';
+    // jquery-ui
+    if (!Asset::checkAssetAdded('jquery-ui', 'js', $whichend)) {
+      $js = "<script src='".uri('libraries/jquery-ui-1.11.4.custom/jquery-ui.min.js', false)."'></script>";
+      Asset::addDynamicAsset('jquery-ui', 'js', $whichend, $js);
+    }
+    if (!Asset::checkAssetAdded('jquery-ui', 'css', $whichend)) {
+      $js = "<link rel=\"stylesheet\" href=\"".uri('libraries/jquery-ui-1.11.4.custom/jquery-ui.theme.min.css', false)."\">";
+      $js.= "\n<link rel=\"stylesheet\" href=\"".uri('libraries/jquery-ui-1.11.4.custom/jquery-ui.structure.min.css', false)."\">";;
+      Asset::addDynamicAsset('jquery-ui', 'css', $whichend, $js);
+    }
+  }
+  
   public function render($module, $model) {
     $rtn = 
 "\n[[[
@@ -39,26 +54,6 @@ class FormWidgetDatepicker extends FormWidget {
 <div class='hr-line-dashed'></div>
 ";
     
-    $rtn .= '
-[[[  // include jquery-ui library if not
-  if (is_frontend()) {
-    $already_included_at_frontend = Asset::checkAssetAdded(\'jquery-ui\', \'js\', \'frontend\') || Asset::checkAssetAdded(\'jquery_ui\', \'js\', \'frontend\');
-    if (!$already_included_at_frontend) {
-      echo( "\n".\'<script type="text/javascript" src="\'.uri(\'modules/core/assets/jquery-ui-1.11.4.custom/jquery-ui.min.js\').\'"></script>\'."\n" );
-      echo( "\n".\'<script type="text/javascript">loadCSS("\'.uri(\'modules/core/assets/jquery-ui-1.11.4.custom/jquery-ui.min.css\').\'")</script>\'."\n" );
-      Asset::addDynamicAsset(\'jquery_ui\', \'js\', \'frontend\', \'<script type="text/javascript" src="\'.uri(\'modules/core/assets/jquery-ui-1.11.4.custom/jquery-ui.min.js\').\'"></script>\');
-    }
-  } else if (is_backend()) {
-    $already_included_at_backend = Asset::checkAssetAdded(\'jquery-ui\', \'js\', \'backend\') || Asset::checkAssetAdded(\'jquery_ui\', \'js\', \'backend\');
-    if (!$already_included_at_backend) {
-      echo( "\n".\'<script type="text/javascript" src="\'.uri(\'modules/core/assets/jquery-ui-1.11.4.custom/jquery-ui.min.js\').\'"></script>\'."\n" );
-      echo( "\n".\'<script type="text/javascript">loadCSS("\'.uri(\'modules/core/assets/jquery-ui-1.11.4.custom/jquery-ui.min.css\').\'")</script>\'."\n" );
-      Asset::addDynamicAsset(\'jquery_ui\', \'js\', \'backend\', \'<script type="text/javascript" src="\'.uri(\'modules/core/assets/jquery-ui-1.11.4.custom/jquery-ui.min.js\').\'"></script>\');
-    }
-  }
-]]]
-';
-    
     $rtn .= "
     <script type='text/javascript'>
       $('#$id .datepicker').datepicker({
@@ -74,19 +69,6 @@ class FormWidgetDatepicker extends FormWidget {
     </script>
 ";
     
-//    $already_included_at_frontend = Asset::checkAssetAdded('jquery-ui', 'js', 'frontend') || Asset::checkAssetAdded('jquery_ui', 'js', 'frontend');
-//    if (!$already_included_at_frontend) {
-//      $rtn .= "\n".'<script type="text/javascript" src="'.uri('modules/core/assets/jquery-ui-1.11.4.custom/jquery-ui.min.js').'"></script>'."\n";
-//      $rtn .= "\n".'<script type="text/javascript">loadCSS("'.uri('modules/core/assets/jquery-ui-1.11.4.custom/jquery-ui.min.js').'")</script>'."\n";
-//      Asset::addDynamicAsset('jquery_ui', 'js', 'frontend', '<script type="text/javascript" src="'.uri('modules/core/assets/jquery-ui-1.11.4.custom/jquery-ui.min.js').'"></script>');
-//    }
-//    $already_included_at_backend = Asset::checkAssetAdded('jquery-ui', 'js', 'backend') || Asset::checkAssetAdded('jquery_ui', 'js', 'backend');
-//    if (!$already_included_at_backend) {
-//      $rtn .= "\n".'<script type="text/javascript" src="'.uri('modules/core/assets/jquery-ui-1.11.4.custom/jquery-ui.min.js').'"></script>'."\n";
-//      $rtn .= "\n".'<script type="text/javascript">loadCSS("'.uri('modules/core/assets/jquery-ui-1.11.4.custom/jquery-ui.min.js').'")</script>'."\n";
-//      Asset::addDynamicAsset('jquery_ui', 'js', 'backend', '<script type="text/javascript" src="'.uri('modules/core/assets/jquery-ui-1.11.4.custom/jquery-ui.min.js').'"></script>');
-//    }
-
     return $rtn;
   }
   

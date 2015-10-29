@@ -144,8 +144,6 @@
   }
 ?>
 
-<script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js'></script>
-
 <script>
   $(function(){
     var container = $('#images');
@@ -473,155 +471,39 @@ tr.html(addImageRow(false, true));
     }
   });
 </script>
-  
-<div class='form-group' id='attachment'>
-  <label class='col-sm-2 control-label'>attachment <span style="color: rgb(185,2,0); font-weight: bold;">*</span></label>
+    
+<?php
+  $prepopulate = ($object->isNew() ? (isset($_POST['date']) ? strip_tags($_POST['date']) : '') : $object->getDate() * 1000);
+  $alt_prepopulate = $prepopulate;
+  if (preg_match('/^\d+$/', $prepopulate)) {
+    $alt_prepopulate = date('Y-m-d', $prepopulate/1000);
+  }
+?>
+
+<div id='6A3Qg' class='form-group'>
+  <label class='col-sm-2 control-label' for='date'>date <span style="color: rgb(185,2,0); font-weight: bold;">*</span></label>
   <div class='col-sm-10'>
-    <textarea name='attachment' style='display: none;'></textarea>
-    <div class='uploaded' style='margin-bottom: 10px;'>
-<?php $files = trim($object->getAttachment(), "\n\r"); ?>
-<?php if (!empty($files)): ?>
-  <?php $files = explode("\n", $files); ?>
-  <?php foreach ($files as $file): ?>
-  <div class='entry'><a class='download' data-path="<?php echo htmlentities($file) ?>\ href='<?php echo uri("$file", false) ?>'><?php echo basename($file); ?></a> &nbsp;&nbsp;<a style="color:red" href="#" data-path="<?php echo htmlentities($file) ?>" class='delete'><i class='fa fa-remove'></i></a></div>
-  <?php endforeach; ?>
-<?php endif; ?>
-    </div>
-    <div class='file-fields' style='border: 1px solid #999; padding: 6px;'>
-      <?php echo i18n(array(
-        'en' => 'File upload requires Flash, Silverlight or HTML5 support. Your browser does not have any of them :(',
-        'zh' => '文件上传需要您的浏览器支持Flash, Silverlight 或者 HTML5。 您的浏览器都不支持 :('
-      ));?>
-    </div>
-    <div class='filecontainer'>
-      <button style='margin-top:6px;' class='browse btn btn-primary btn-sm' type='button'><?php echo i18n(array('en' => 'Select file', 'zh' => '选择文件')) ?></button>
-      <button style='margin-top:6px;' class='upload btn btn-success btn-sm' type='button'><?php echo i18n(array('en' => 'Upload', 'zh' => '上传')) ?></button>
-      <p>
-        <small style='font-style:italic;'>
-          Max file upload size: 4 MB<br />
-          Allowed file type: jpg,png,gif,zip
-        </small>
-      </p>
+    <div class='input-group'>
+      <span class='input-group-addon'><i class='fa fa-calendar'></i></span>
+      <input disabled='disabled' value='<?php echo htmlentities(str_replace('\'', '"', $alt_prepopulate)) ?>' type='text' class='form-control altFormat'  required />
+      <input value='<?php echo htmlentities(str_replace('\'', '"', $prepopulate)) ?>' type='text' id='date' name='date' class='datepicker form-control'  required  style='position: absolute; top:0; left: 0; z-index: -1' />
     </div>
   </div>
 </div>
 <div class='hr-line-dashed'></div>
 
-<?php
-  // get json string of prepopulated image links
-  $prepopulate = $object->isNew() ? '' : $object->getAttachment();
-  if ($prepopulate != '') {
-    $tokens = explode("\n", trim($prepopulate));
-    $prepopulate = array();
-    foreach ($tokens as $token) {
-      $prepopulate[] = trim($token, "\n\r");
-    }
-  }
-?>
-
-<script src='/modules/core/assets/plupload/js/plupload.full.min.js'></script>
-
-<script type='text/javascript'>
-  $(function(){
-
-    // initialize uploader
-    var uploader = new plupload.Uploader({
-      runtimes : 'html5,flash,silverlight,html4',
-      browse_button : $('#attachment .filecontainer .browse')[0], // you can pass an id...
-      container: $('#attachment .filecontainer')[0], // ... or DOM Element itself
-      url : '/modules/project/controllers/backend/project_form_field_attachment_upload.php',
-      flash_swf_url : '/modules/core/assets/plupload/js/Moxie.swf',
-      silverlight_xap_url : '/modules/core/assets/plupload/js/Moxie.xap',
-
-      filters : {
-        max_file_size : '4mb',
-        mime_types: [
-          {title : "Allowed files", extensions : "jpg,png,gif,zip"},
-        ]
-      },
-
-      init: {
-        PostInit: function() {
-          $('#attachment .file-fields')[0].innerHTML = '';
-
-          $('#attachment .upload')[0].onclick = function() {
-            uploader.start();
-            return false;
-          };
-        },
-
-        FilesAdded: function(up, files) {
-          
-          
-          var maxfiles = 2;
-          if(up.files.length > maxfiles ) {
-              up.splice(maxfiles);
-              alert('no more than '+maxfiles + ' file(s)');
-          } else {
-            plupload.each(files, function(file) {
-                        $('#attachment .file-fields')[0].innerHTML += '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
-                      });
-          }
-          if (up.files.length === maxfiles) {
-              $('#attachment .browse').addClass('');
-          }
-        },
-
-        UploadProgress: function(up, file) {
-          document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
-        },
-
-        Error: function(up, err) {
-          alert('Error #' + err.code + ': ' + err.message);
-        },
-        
-        FileUploaded: function(uploader, file, response) {
-          var msg = typeof response.response == 'string' ? JSON.parse(response.response) : response.response;
-          if (response.status != 200) {
-            $('#' + file.id).fadeOut();
-            alert('File upload error: wrong status code -  ' + response.status.toString());
-          } else {
-             if (msg.error !== undefined) {
-              $('#' + file.id).fadeOut();
-              alert(msg.error);
-            } else {
-              $('#attachment .uploaded').append('<div id="file_'+Math.round((Math.random()*10000+1)).toString()+'" class="entry"><a href="" data-path="'+msg.filepath+'" class="download">' + file.name + '</a> &nbsp;&nbsp;<a class="delete" data-path="'+msg.filepath+'" style="color:red;" href="#"><i class="fa fa-remove"></i></a></div>');
-              updateHiddenTextarea($('#attachment'));
-            }
-          }
-
-        }
-      }
-    });
-    uploader.init();
-    
-    // file delete action
-    $('#attachment').on('click', '.entry .delete', function(){
-      var id = $(this).parent().attr('id');
-      $.post(
-        "/modules/project/controllers/backend/project_form_field_attachment_remove.php",
-        'path='+$(this).data('path')+'&id='+id,
-        function(data) {
-          if (data.error !== undefined) {
-            alert(data.error);
-          }
-          $('#'+data.id).remove();
-          updateHiddenTextarea($('#attachment'));
-        }, 'json'
-      );
-      return false;
-    });
-
-    function updateHiddenTextarea(container) {
-      var html = '';
-      $('.uploaded .entry a.download', container).each(function(){
-        var uri = $(this).data('path');
-        html = html + uri + "\n";
+    <script type='text/javascript'>
+      $('#6A3Qg .datepicker').datepicker({
+        dateFormat: '@'
+        ,altField: "#6A3Qg .altFormat", altFormat: "yy-mm-dd"
+        ,changeMonth: 1
+        ,changeYear: 1
+        ,yearRange: 'c-5:c+10'
       });
-      $('textarea', container).val(html);
-    }
-  });
-</script>
+      $('#6A3Qg .input-group-addon').css('cursor', 'pointer').on('click', function(){
+        $('#6A3Qg .datepicker').datepicker('show');
+      });
+    </script>
 
   <input type="submit" name="submit" value="<?php i18n_echo(array(
       'en' => 'Edit', 

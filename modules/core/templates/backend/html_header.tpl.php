@@ -24,6 +24,9 @@
 <?php Asset::printTopAssets('backend'); ?>
 <?php HTML::renderOutHeaderLowerRegistry(); ?>
   
+<?php Asset::renderAllDynamicAssets('js', 'backend') ?>
+<?php Asset::renderAllDynamicAssets('css', 'backend') ?>
+
 </head>
 
 <body class="admin <?php if (isset($body_class)) {echo $body_class; }?>">

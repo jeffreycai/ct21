@@ -75,7 +75,7 @@ assets:
         position: top
         weight: 20
 #        source: //maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css
-        source: core/assets/font-awesome-4.2.0/css/font-awesome.min.css
+        source: ../../libraries/font-awesome-4.2.0/css/font-awesome.min.css
 
     js:
 #      jquery:

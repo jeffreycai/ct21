@@ -22,6 +22,21 @@ class FormWidgetImage extends FormWidget {
     $this->watermark = isset($conf['watermark']) ? $conf['watermark'] : 0;
   }
   
+  static function bootstrap() {
+    // include libs
+    $whichend = is_backend() ? 'backend' : 'frontend';
+    // jquery-ui
+    if (!Asset::checkAssetAdded('jquery-ui', 'js', $whichend)) {
+      $js = "<script src='".uri('libraries/jquery-ui-1.11.4.custom/jquery-ui.min.js', false)."'></script>";
+      Asset::addDynamicAsset('jquery-ui', 'js', $whichend, $js);
+    }
+    if (!Asset::checkAssetAdded('jquery-ui', 'css', $whichend)) {
+      $js = "<link rel=\"stylesheet\" href=\"".uri('libraries/jquery-ui-1.11.4.custom/jquery-ui.theme.min.css', false)."\">";
+      $js.= "\n<link rel=\"stylesheet\" href=\"".uri('libraries/jquery-ui-1.11.4.custom/jquery-ui.structure.min.css', false)."\">";;
+      Asset::addDynamicAsset('jquery-ui', 'css', $whichend, $js);
+    }
+  }
+  
   public function render($module, $model) {
     $rtn = "";
     $rtn .=
@@ -48,14 +63,6 @@ class FormWidgetImage extends FormWidget {
   }
 ]]]
 ";
-    // include jquery-ui, when we've got multiple images
-    if ($this->multiple) {
-      if (!Asset::checkAssetAdded('jquery-ui', 'js', 'backend')) {
-        $js = "\n<script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js'></script>\n";
-        Asset::addDynamicAsset('jquery-ui', 'js', 'backend', $js);
-        $rtn .= $js;
-      }
-    }
 
     // js
     $rtn .= "\n<script>

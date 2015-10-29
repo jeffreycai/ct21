@@ -95,6 +95,13 @@ if (isset($_POST['submit'])) {
     Message::register(new Message(Message::DANGER, i18n(array("en" => "attachment is required.", "zh" => "请填写attachment"))));
     $error_flag = true;
   }
+  
+  // validation for $date
+  $date = isset($_POST["date"]) ? strip_tags($_POST["date"]) : null;
+  if (empty($date)) {
+    Message::register(new Message(Message::DANGER, i18n(array("en" => "date is required.", "zh" => "请填写date"))));
+    $error_flag = true;
+  }
   /// proceed submission
   
   // proceed for $title
@@ -131,6 +138,9 @@ if (isset($_POST['submit'])) {
   
   // proceed for $attachment
   $object->setAttachment($attachment);
+  
+  // proceed for $date
+  $object->setDate($date/1000);
   if ($error_flag == false) {
     if ($object->save()) {
       Message::register(new Message(Message::SUCCESS, i18n(array("en" => "Record saved", "zh" => "记录保存成功"))));

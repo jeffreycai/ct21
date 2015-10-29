@@ -141,6 +141,17 @@ class Asset {
     return $dynamic_assets[$whichend][$type][$key];
   }
   
+  static function getAllDynamicAssets($type, $whichend) {
+    global $dynamic_assets;
+    return $dynamic_assets[$whichend][$type];
+  }
+  
+  static function renderAllDynamicAssets($type, $whichend) {
+    foreach (self::getAllDynamicAssets($type, $whichend) as $key => $val) {
+      echo "  " . $val . "\n";
+    }
+  }
+  
   static function clearDynamicAssets() {
     global $dynamic_assets;
     $dynamic_assets = null;
