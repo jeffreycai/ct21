@@ -98,18 +98,6 @@
 </div>
 <div class='hr-line-dashed'></div>
   
-       <?php $items = ($object->isNew() ? (isset($_POST['owners']) ? explode(';', $_POST['owners']) : '') : explode(';', $object->getOwners() )) ?>
-<div class='form-group'>
-  <label class='col-sm-2 control-label'>owners <span style="color: rgb(185,2,0); font-weight: bold;">*</span></label>
-  <div class='col-sm-10'>
-    <div class='checkbox'>
-      <label><input type='checkbox' <?php if (in_array('Jack', $items)): ?>checked='checked'<?php endif; ?> name='owners[]' value='jack' /> Jack</label>
-      <label><input type='checkbox' <?php if (in_array('Sue', $items)): ?>checked='checked'<?php endif; ?> name='owners[]' value='sue' /> Sue</label>
-    </div>
-  </div>
-</div>
-<div class='hr-line-dashed'></div>
-  
 <div class='form-group'>
   <label class='col-sm-2 control-label'>price </label>
   <div class='col-sm-10'>
@@ -471,7 +459,7 @@ tr.html(addImageRow(false, true));
     }
   });
 </script>
-    
+  
 <?php
   $prepopulate = ($object->isNew() ? (isset($_POST['date']) ? strip_tags($_POST['date']) : '') : $object->getDate() * 1000);
   $alt_prepopulate = $prepopulate;
@@ -480,7 +468,7 @@ tr.html(addImageRow(false, true));
   }
 ?>
 
-<div id='6A3Qg' class='form-group'>
+<div id='OQl24' class='form-group'>
   <label class='col-sm-2 control-label' for='date'>date <span style="color: rgb(185,2,0); font-weight: bold;">*</span></label>
   <div class='col-sm-10'>
     <div class='input-group'>
@@ -493,17 +481,223 @@ tr.html(addImageRow(false, true));
 <div class='hr-line-dashed'></div>
 
     <script type='text/javascript'>
-      $('#6A3Qg .datepicker').datepicker({
+      $('#OQl24 .datepicker').datepicker({
         dateFormat: '@'
-        ,altField: "#6A3Qg .altFormat", altFormat: "yy-mm-dd"
+        ,altField: "#OQl24 .altFormat", altFormat: "yy-mm-dd"
         ,changeMonth: 1
         ,changeYear: 1
         ,yearRange: 'c-5:c+10'
       });
-      $('#6A3Qg .input-group-addon').css('cursor', 'pointer').on('click', function(){
-        $('#6A3Qg .datepicker').datepicker('show');
+      $('#OQl24 .input-group-addon').css('cursor', 'pointer').on('click', function(){
+        $('#OQl24 .datepicker').datepicker('show');
       });
     </script>
+  
+    <div class="form-group">
+      <label for="attachment" class="col-sm-2 control-label">attachment <span style="color: rgb(185,2,0); font-weight: bold;">*</span></label>
+      <div class="col-sm-10">
+        <textarea required="" name="attachment" id="attachment" rows="5" class="form-control"><?php echo isset($_POST["attachment"]) ? htmlentities($_POST["attachment"]) : htmlentities($object->getAttachment()); ?></textarea>
+
+        <div id="attachment_uploader" class="uploader" style="display: none;">
+            <p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
+        </div>
+
+      </div>
+    </div>
+    <div class="hr-line-dashed"></div>
+
+  
+<!-- js code for #attachment_uploader -->
+<script type="text/javascript">
+$(function() {
+  /** define var **/
+  var max_file_number = 3;
+  
+  /** build file list from textarea **/
+  textareaToFilelist($('#attachment'), max_file_number);
+  
+  /** bind file delete action **/
+  $('#attachment').parents('.form-group').first().on('click', '.delete', function(){
+    $(this).prop('disabled', true);
+    var filelist = $(this).parents('.file-container').first();
+    $.post('/modules/project/controllers/backend/project_form_field_attachment_remove.php', {
+      fid: $(this).parents('li').first().attr('id'),
+      furi: $(this).data('furi')
+    }, function(data){
+      if (data.error !== undefined) {
+        alert("Failed to delete file. Error: "+data.error);
+      }
+      
+      filelist = $('#'+data.fid).parents('.file-container');
+      $('#'+data.fid).remove();
+      filelistToTextarea(filelist, max_file_number);
+    }, 'json');
+    return false;
+  });
+  
+  /** plupload Queue initialization **/
+  
+  $("#attachment_uploader").pluploadQueue({
+      // General settings
+      runtimes : 'html5,flash,silverlight,html4',
+      url : "/modules/project/controllers/backend/project_form_field_attachment_upload.php",
+      chunk_size : '1mb',
+      rename : false,
+      dragdrop: true,
+
+      filters : {
+          max_file_size : '4mb',
+          mime_types: [
+              {title : "Allowed files", extensions : "jpg,png,gif,zip"}
+          ]
+      },
+      flash_swf_url : '/libraries/plupload/js/Moxie.swf',
+      silverlight_xap_url : '/libraries/plupload/js/Moxie.xap',
+      unique_names : true, // generate an unique file name for the uploaded file and send it as an additional argument - name, to server handling script
+      multiple_queues : true // Re-activate the widget after each upload procedure.
+      ,multi_selection : true
+  });
+  var uploader = $('#attachment_uploader').pluploadQueue();
+
+  // when upload complete
+  uploader.bind('UploadComplete', function(uploader, files){
+    // append plup file list to textarea
+    while (files[0] !== undefined) {
+      if (files[0].status == plupload.DONE) {
+        var existing_content = jQuery.trim($('#attachment').val());
+        var to_be_added = (existing_content == '' ? '' : "\n") + 'files/cache/' + files[0].target_name.toLowerCase();
+        $('#attachment').val(existing_content + to_be_added);
+      }
+      // and remove it from plup file list
+      uploader.removeFile(files[0]);
+    }
+    // refresh file list
+    textareaToFilelist($('#attachment'), max_file_number);
+  });
+
+  // when file(s) added
+  uploader.bind('FilesAdded', function(uploader, files){
+    var content = jQuery.trim($('#attachment').val());
+    if (content == '') {
+      var existing_files = [];
+    } else {
+      var existing_files = content.split("\n");
+    }
+    var added_files = uploader.files;
+    if (existing_files.length + added_files.length > max_file_number) {
+      alert('<?php echo i18n(array("en" => "Too many files selected. Max allowed upload limit is ","zh" => "您选择的文件过多了，最大允许的上传数为")) ?> ' + max_file_number + ' <?php echo i18n(array("en" => "files", "zh" => "")); ?>.' + ' <?php echo i18n(array("en" => "Only ", "zh" => "您上传的文件仅有")) ?>' + (max_file_number - existing_files.length) + ' <?php echo i18n(array("en" => "of your selected files are accepted", "zh" => "个文件被接受")) ?>.');
+      for (i=uploader.files.length-1; i>(max_file_number - existing_files.length - 1); i--) {
+        uploader.removeFile(uploader.files[i]);
+      }
+    }
+  });
+
+});
+</script>
+<!-- END OF js code for #attachment_uploader -->
+  
+    <div class="form-group">
+      <label for="application" class="col-sm-2 control-label">application <span style="color: rgb(185,2,0); font-weight: bold;">*</span></label>
+      <div class="col-sm-10">
+        <textarea required="" name="application" id="application" rows="5" class="form-control"><?php echo isset($_POST["application"]) ? htmlentities($_POST["application"]) : htmlentities($object->getApplication()); ?></textarea>
+
+        <div id="application_uploader" class="uploader" style="display: none;">
+            <p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
+        </div>
+
+      </div>
+    </div>
+    <div class="hr-line-dashed"></div>
+
+  
+<!-- js code for #application_uploader -->
+<script type="text/javascript">
+$(function() {
+  /** define var **/
+  var max_file_number = 1;
+  
+  /** build file list from textarea **/
+  textareaToFilelist($('#application'), max_file_number);
+  
+  /** bind file delete action **/
+  $('#application').parents('.form-group').first().on('click', '.delete', function(){
+    $(this).prop('disabled', true);
+    var filelist = $(this).parents('.file-container').first();
+    $.post('/modules/project/controllers/backend/project_form_field_application_remove.php', {
+      fid: $(this).parents('li').first().attr('id'),
+      furi: $(this).data('furi')
+    }, function(data){
+      if (data.error !== undefined) {
+        alert("Failed to delete file. Error: "+data.error);
+      }
+      
+      filelist = $('#'+data.fid).parents('.file-container');
+      $('#'+data.fid).remove();
+      filelistToTextarea(filelist, max_file_number);
+    }, 'json');
+    return false;
+  });
+  
+  /** plupload Queue initialization **/
+  
+  $("#application_uploader").pluploadQueue({
+      // General settings
+      runtimes : 'html5,flash,silverlight,html4',
+      url : "/modules/project/controllers/backend/project_form_field_application_upload.php",
+      chunk_size : '1mb',
+      rename : false,
+      dragdrop: true,
+
+      filters : {
+          max_file_size : '4mb',
+          mime_types: [
+              {title : "Allowed files", extensions : "jpg,png,gif,zip"}
+          ]
+      },
+      flash_swf_url : '/libraries/plupload/js/Moxie.swf',
+      silverlight_xap_url : '/libraries/plupload/js/Moxie.xap',
+      unique_names : true, // generate an unique file name for the uploaded file and send it as an additional argument - name, to server handling script
+      multiple_queues : true // Re-activate the widget after each upload procedure.
+      ,multi_selection : true
+  });
+  var uploader = $('#application_uploader').pluploadQueue();
+
+  // when upload complete
+  uploader.bind('UploadComplete', function(uploader, files){
+    // append plup file list to textarea
+    while (files[0] !== undefined) {
+      if (files[0].status == plupload.DONE) {
+        var existing_content = jQuery.trim($('#application').val());
+        var to_be_added = (existing_content == '' ? '' : "\n") + 'files/cache/' + files[0].target_name.toLowerCase();
+        $('#application').val(existing_content + to_be_added);
+      }
+      // and remove it from plup file list
+      uploader.removeFile(files[0]);
+    }
+    // refresh file list
+    textareaToFilelist($('#application'), max_file_number);
+  });
+
+  // when file(s) added
+  uploader.bind('FilesAdded', function(uploader, files){
+    var content = jQuery.trim($('#application').val());
+    if (content == '') {
+      var existing_files = [];
+    } else {
+      var existing_files = content.split("\n");
+    }
+    var added_files = uploader.files;
+    if (existing_files.length + added_files.length > max_file_number) {
+      alert('<?php echo i18n(array("en" => "Too many files selected. Max allowed upload limit is ","zh" => "您选择的文件过多了，最大允许的上传数为")) ?> ' + max_file_number + ' <?php echo i18n(array("en" => "files", "zh" => "")); ?>.' + ' <?php echo i18n(array("en" => "Only ", "zh" => "您上传的文件仅有")) ?>' + (max_file_number - existing_files.length) + ' <?php echo i18n(array("en" => "of your selected files are accepted", "zh" => "个文件被接受")) ?>.');
+      for (i=uploader.files.length-1; i>(max_file_number - existing_files.length - 1); i--) {
+        uploader.removeFile(uploader.files[i]);
+      }
+    }
+  });
+
+});
+</script>
+<!-- END OF js code for #application_uploader -->
 
   <input type="submit" name="submit" value="<?php i18n_echo(array(
       'en' => 'Edit', 

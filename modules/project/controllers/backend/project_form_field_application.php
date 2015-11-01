@@ -9,7 +9,7 @@ if (!User::getInstance()->isLogin()) {
   exit;
 }
 
-$upload_dir = "files/fields/thumbnail";
+$upload_dir = "files/plupfiletest";
 
 if (isset($_FILES)) {
   $files = array();

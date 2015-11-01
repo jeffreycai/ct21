@@ -4,7 +4,7 @@ $object = new <?php echo $model_class ?>();
 // bootstrap field widgets
 <?php foreach ($form_fields as $field => $settings):
 if (method_exists($settings['widget_class'], 'bootstrap')): ?>
-<?php echo $settings['widget_class'] ?>::bootstrap();
+<?php echo $settings['widget_class'] ?>::bootstrap('<?php echo $field ?>');
 <?php endif;
 endforeach; ?>
   

@@ -10,11 +10,11 @@ include_once MODULESROOT . DS . 'core' . DS . 'includes' . DS . 'classes' . DS .
  * - description_en
  * - description_zh
  * - active
- * - hot
  * - price
  * - images
  * - thumbnail
  * - attachment
+ * - application
  * - date
  */
 class BaseProject extends DBObject {
@@ -90,12 +90,6 @@ class BaseProject extends DBObject {
    public function getActive() {
      return $this->getDbFieldActive();
    }
-   public function setHot($var) {
-     $this->setDbFieldHot($var);
-   }
-   public function getHot() {
-     return $this->getDbFieldHot();
-   }
    public function setPrice($var) {
      $this->setDbFieldPrice($var);
    }
@@ -119,6 +113,12 @@ class BaseProject extends DBObject {
    }
    public function getAttachment() {
      return $this->getDbFieldAttachment();
+   }
+   public function setApplication($var) {
+     $this->setDbFieldApplication($var);
+   }
+   public function getApplication() {
+     return $this->getDbFieldApplication();
    }
    public function setDate($var) {
      $this->setDbFieldDate($var);
@@ -153,11 +153,11 @@ CREATE TABLE IF NOT EXISTS `project` (
   `description_en` TEXT ,
   `description_zh` TEXT ,
   `active` TINYINT(1) DEFAULT 1 ,
-  `hot` TINYINT(1) DEFAULT 1 ,
   `price` DECIMAL(6) DEFAULT 0 ,
   `images` VARCHAR(800) ,
   `thumbnail` VARCHAR(100) ,
   `attachment` VARCHAR(1000) ,
+  `application` VARCHAR(1000) ,
   `date` INT ,
   PRIMARY KEY (`id`)
 )

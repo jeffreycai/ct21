@@ -8,11 +8,11 @@ project:
     description_en: TEXT
     description_zh: TEXT
     active: TINYINT(1) DEFAULT 1
-    hot: TINYINT(1) DEFAULT 1
     price: DECIMAL(6) DEFAULT 0
     images: VARCHAR(800)
     thumbnail: VARCHAR(100)
     attachment: VARCHAR(1000)
+    application: VARCHAR(1000)
     date: INT
   form:
     fields:
@@ -45,13 +45,13 @@ project:
       active:
         widget: checkbox_single
         widget_conf: 
-      owners:
-        widget: checkbox_multiple
-        widget_conf:
-          required: 1
-          options:
-            jack: Jack
-            sue: Sue
+#      owners:
+#        widget: checkbox_multiple
+#        widget_conf:
+#          required: 1
+#          options:
+#            jack: Jack
+#            sue: Sue
       price:
         widget: select
         widget_conf:
@@ -77,15 +77,6 @@ project:
           multiple: 0
           upload_dir: files/fields/thumbnail
           transform: 0
-      attachment:
-        widget: plupfile
-        widget_conf:
-          required: 1
-          multiple: 2
-          upload_dir: files/plupfiletest
-          # max_file_size in mb
-          max_file_size: 4
-          extensions: jpg,png,gif,zip
       date:
         widget: datepicker
         widget_conf:
@@ -96,7 +87,24 @@ project:
             changeMonth: true
             changeYear: true
             yearRange: "c-5:c+10"
-          
+      attachment:
+        widget: plupfile
+        widget_conf:
+          required: 1
+          upload_dir: files/plupfiletest
+          # max_file_size in mb
+          max_file_size: 4
+          max_file_number: 3
+          extensions: jpg,png,gif,zip
+      application:
+        widget: plupfile
+        widget_conf:
+          required: 0
+          upload_dir: files/plupfiletest
+          # max_file_size in mb
+          max_file_size: 4
+          max_file_number: 1
+          extensions: jpg,png,gif,zip
         
     names:
       en: Project

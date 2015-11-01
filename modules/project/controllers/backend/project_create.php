@@ -3,10 +3,11 @@
 $object = new Project();
 
 // bootstrap field widgets
-FormWidgetImage::bootstrap();
-FormWidgetImage::bootstrap();
-FormWidgetPlupfile::bootstrap();
-FormWidgetDatepicker::bootstrap();
+FormWidgetImage::bootstrap('images');
+FormWidgetImage::bootstrap('thumbnail');
+FormWidgetDatepicker::bootstrap('date');
+FormWidgetPlupfile::bootstrap('attachment');
+FormWidgetPlupfile::bootstrap('application');
   
 // handle form submission
 if (isset($_POST['submit'])) {
@@ -73,13 +74,6 @@ if (isset($_POST['submit'])) {
   
   // validation for $active
   $active = isset($_POST["active"]) ? 1 : 0;  
-  // validation for $owners
-  $owners = isset($_POST["owners"]) ? $_POST["owners"] : null;
-  if (empty($owners)) {
-    Message::register(new Message(Message::DANGER, i18n(array("en" => "owners is required.", "zh" => "请填写owners"))));
-    $error_flag = true;
-  }
-  
   // validation for $price
   $price = isset($_POST["price"]) ? strip_tags($_POST["price"]) : null;  
   // validation for $images
@@ -91,18 +85,75 @@ if (isset($_POST['submit'])) {
     $error_flag = true;
   }
   
-  // validation for $attachment
-  $attachment = isset($_POST["attachment"]) ? strip_tags(trim($_POST["attachment"])) : null;
-  if (empty($attachment)) {
-    Message::register(new Message(Message::DANGER, i18n(array("en" => "attachment is required.", "zh" => "请填写attachment"))));
-    $error_flag = true;
-  }
-  
   // validation for $date
   $date = isset($_POST["date"]) ? strip_tags($_POST["date"]) : null;
   if (empty($date)) {
     Message::register(new Message(Message::DANGER, i18n(array("en" => "date is required.", "zh" => "请填写date"))));
     $error_flag = true;
+  }
+  
+  // validation for $attachment
+  $attachment = isset($_POST["attachment"]) ? strip_tags(trim($_POST["attachment"])) : null;
+  // check not empty
+  if (empty($attachment)) {
+    Message::register(new Message(Message::DANGER, i18n(array("en" => "attachment is required.", "zh" => "请填写attachment"))));
+    $error_flag = true;
+  }
+
+  // check upload_dir
+  if (!is_dir(WEBROOT . DS . "files/plupfiletest")) {
+    mkdir(WEBROOT . DS . "files/plupfiletest");
+  }
+  if (!is_writable(WEBROOT . DS . "files/plupfiletest")) {
+    $error_flag = true;
+    Message::register(new Message(Message::DANGER, i18n(array("en" => "Upload dir is not writable.", "zh" => "上传文件夹不可写"))));
+  } else {
+    $files = explode("\n", trim($attachment));
+    // check max_file_number
+    if (sizeof($files) > 3) {
+      Message::register(new Message(Message::DANGER, i18n(array("en" => "Max file allowed to be uploed is 3. Please reduce uploaed files.", "zh" => "您最多可以上传3个文件，请减少上传的文件数量"))));
+      $error_flag = true;
+    }
+    // check file extension
+    foreach ($files as $file) {
+      $file = trim($file);
+      $tokens = explode(".", $file);
+      $extension = array_pop($tokens);
+      if (!in_array(strtolower($extension), array('jpg','png','gif','zip'))) {
+        Message::register(new Message(Message::DANGER, i18n(array("en" => "Only file with extension jpg,png,gif,zip is allowed. Please restrict your files with these types.", "zh" => "上传文件仅支持jpg,png,gif,zip，请检查您的上传文件"))));
+        $error_flag = true;
+        break;
+      }
+    }
+  }
+  
+  // validation for $application
+  $application = isset($_POST["application"]) ? strip_tags(trim($_POST["application"])) : null;
+  // check upload_dir
+  if (!is_dir(WEBROOT . DS . "files/plupfiletest")) {
+    mkdir(WEBROOT . DS . "files/plupfiletest");
+  }
+  if (!is_writable(WEBROOT . DS . "files/plupfiletest")) {
+    $error_flag = true;
+    Message::register(new Message(Message::DANGER, i18n(array("en" => "Upload dir is not writable.", "zh" => "上传文件夹不可写"))));
+  } else {
+    $files = explode("\n", trim($application));
+    // check max_file_number
+    if (sizeof($files) > 1) {
+      Message::register(new Message(Message::DANGER, i18n(array("en" => "Max file allowed to be uploed is 1. Please reduce uploaed files.", "zh" => "您最多可以上传1个文件，请减少上传的文件数量"))));
+      $error_flag = true;
+    }
+    // check file extension
+    foreach ($files as $file) {
+      $file = trim($file);
+      $tokens = explode(".", $file);
+      $extension = array_pop($tokens);
+      if (!in_array(strtolower($extension), array('jpg','png','gif','zip'))) {
+        Message::register(new Message(Message::DANGER, i18n(array("en" => "Only file with extension jpg,png,gif,zip is allowed. Please restrict your files with these types.", "zh" => "上传文件仅支持jpg,png,gif,zip，请检查您的上传文件"))));
+        $error_flag = true;
+        break;
+      }
+    }
   }
   /// proceed submission
   
@@ -124,9 +175,6 @@ if (isset($_POST['submit'])) {
   // proceed for $active
   $object->setActive($active);
   
-  // proceed for $owners
-  $object->setOwners(implode(";", $owners));
-  
   // proceed for $price
   if (!empty($price)) {
     $object->setPrice($price);
@@ -138,11 +186,40 @@ if (isset($_POST['submit'])) {
   // proceed for $thumbnail
   $object->setThumbnail($thumbnail);
   
-  // proceed for $attachment
-  $object->setAttachment($attachment);
-  
   // proceed for $date
   $object->setDate($date/1000);
+  
+  // proceed for $attachment
+  $files = explode("\n", trim($attachment));
+  $rtn = array();
+  foreach ($files as $file) {
+    $file = trim($file);
+    // for cache file, we move it to its proper location 
+    if (strpos($file, str_replace(WEBROOT . DS, "", CACHE_DIR)) === 0) {
+      $oldname = WEBROOT . DS . $file;
+      $newname = WEBROOT . DS . "files/plupfiletest" . str_replace(CACHE_DIR, "", WEBROOT . DS . $file);
+      rename($oldname, $newname);
+      $file = str_replace(WEBROOT . DS, "", $newname);
+    }
+    $rtn[] = $file;
+  }
+  $object->setAttachment(implode("\n", $rtn));
+  
+  // proceed for $application
+  $files = explode("\n", trim($application));
+  $rtn = array();
+  foreach ($files as $file) {
+    $file = trim($file);
+    // for cache file, we move it to its proper location 
+    if (strpos($file, str_replace(WEBROOT . DS, "", CACHE_DIR)) === 0) {
+      $oldname = WEBROOT . DS . $file;
+      $newname = WEBROOT . DS . "files/plupfiletest" . str_replace(CACHE_DIR, "", WEBROOT . DS . $file);
+      rename($oldname, $newname);
+      $file = str_replace(WEBROOT . DS, "", $newname);
+    }
+    $rtn[] = $file;
+  }
+  $object->setApplication(implode("\n", $rtn));
   if ($error_flag == false) {
     if ($object->save()) {
       Message::register(new Message(Message::SUCCESS, i18n(array("en" => "Record saved", "zh" => "记录保存成功"))));

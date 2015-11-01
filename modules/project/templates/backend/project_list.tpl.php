@@ -25,11 +25,11 @@
                 <th>description_en</th>
                 <th>description_zh</th>
                 <th>active</th>
-                <th>hot</th>
                 <th>price</th>
                 <th>images</th>
                 <th>thumbnail</th>
                 <th>attachment</th>
+                <th>application</th>
                 <th>date</th>
                 <th>Actions</th>
       </tr>
@@ -44,11 +44,11 @@
             <td><?php echo $object->getDescriptionEn() ?></td>
             <td><?php echo $object->getDescriptionZh() ?></td>
             <td><?php echo $object->getActive() ?></td>
-            <td><?php echo $object->getHot() ?></td>
             <td><?php echo $object->getPrice() ?></td>
             <td><?php echo $object->getImages() ?></td>
             <td><?php echo $object->getThumbnail() ?></td>
             <td><?php echo $object->getAttachment() ?></td>
+            <td><?php echo $object->getApplication() ?></td>
             <td><?php echo $object->getDate() ?></td>
             <td>
         <div class="btn-group">

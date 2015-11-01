@@ -1,26 +1,24 @@
 
 require_once __DIR__ .'/../../../../bootstrap.php';
 
+$rtn = new stdClass();
 if (!User::getInstance()->isLogin()) {
   $rtn->error = i18n(array('en' => 'Authorisation required.', 'zh' => '抱歉，您没有权限进行此操作'));
   echo json_encode($rtn);
   exit;
 }
 
-$file = strip_tags($_POST['path']);
-$file_path = is_file(CACHE_DIR . DS . $file) ? (CACHE_DIR . DS . $file) : (WEBROOT . DS . $file);
-$rtn = new stdClass();
+$fid = strip_tags($_POST['fid']);
+$furi = WEBROOT . DS . strip_tags($_POST['furi']);
 
-if (is_file($file_path)) {
-  if (unlink($file_path)) {
-    $rtn->success = 1;
-    $rtn->id = strip_tags($_POST['id']);
-  } else {
-    $rtn->error = i18n(array('en' => 'Failed to delete file.', 'zh' => '删除文件失败'));
-  }
+$rtn->fid = strip_tags($_POST['fid']);
+if (is_file($furi) && unlink($furi)) {
+  $rtn->success = 1;
 } else {
-  $rtn->error = i18n(array('en' => 'Failed to delete file', 'zh' => '删除文件失败'));
+  $rtn->error = i18n(array(
+    "en" => "Failed to delete file",
+    "zh" => "删除文件失败"
+  ));
 }
-
 echo json_encode($rtn);
-exit;
+

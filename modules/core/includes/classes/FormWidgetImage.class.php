@@ -27,12 +27,12 @@ class FormWidgetImage extends FormWidget {
     $whichend = is_backend() ? 'backend' : 'frontend';
     // jquery-ui
     if (!Asset::checkAssetAdded('jquery-ui', 'js', $whichend)) {
-      $js = "<script src='".uri('libraries/jquery-ui-1.11.4.custom/jquery-ui.min.js', false)."'></script>";
+      $js = "<script src='".uri('libraries/jquery-ui/jquery-ui.min.js', false)."'></script>";
       Asset::addDynamicAsset('jquery-ui', 'js', $whichend, $js);
     }
     if (!Asset::checkAssetAdded('jquery-ui', 'css', $whichend)) {
-      $js = "<link rel=\"stylesheet\" href=\"".uri('libraries/jquery-ui-1.11.4.custom/jquery-ui.theme.min.css', false)."\">";
-      $js.= "\n<link rel=\"stylesheet\" href=\"".uri('libraries/jquery-ui-1.11.4.custom/jquery-ui.structure.min.css', false)."\">";;
+      $js = "<link rel=\"stylesheet\" href=\"".uri('libraries/jquery-ui/jquery-ui.theme.min.css', false)."\">";
+      $js.= "\n<link rel=\"stylesheet\" href=\"".uri('libraries/jquery-ui/jquery-ui.structure.min.css', false)."\">";;
       Asset::addDynamicAsset('jquery-ui', 'css', $whichend, $js);
     }
   }

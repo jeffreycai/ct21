@@ -19,7 +19,7 @@ class FormWidgetCheckboxMultiple extends FormWidget {
       $options .= "\n      <label><input type='checkbox' [[[ if (in_array('$val', \$items)): ]]]checked='checked'[[[ endif; ]]] name='".$this->name."[]' value='$key' /> $val</label>";
     }
     
-    $rtn = "\n       [[[ \$items = (\$object->isNew() ? (isset(\$_POST['$this->name']) ? explode(';', \$_POST['$this->name']) : '') : explode(';', \$object->get". format_as_class_name($this->name)."() )) ]]]";
+    $rtn = "\n       [[[ \$items = (\$object->isNew() ? (isset(\$_POST['$this->name']) ? explode(';', \$_POST['$this->name']) : array()) : explode(';', \$object->get". format_as_class_name($this->name)."() )) ]]]";
     $rtn .=
 "\n<div class='form-group'>
   <label class='col-sm-2 control-label'>$this->name ".($this->required ? $this->mandatory_field : '')."</label>

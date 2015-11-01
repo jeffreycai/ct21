@@ -82,7 +82,7 @@ if (isset($_REQUEST["name"])) {
   $fileName = preg_replace('/_+/', '_', $fileName);
   $fileName = strtolower($fileName);
   $tokens = explode(".", $fileName);
-  $tokens[sizeof($tokens)-2] = $tokens[sizeof($tokens)-2] . "_" . rand(100, 999);
+  // $tokens[sizeof($tokens)-2] = $tokens[sizeof($tokens)-2] . "_" . rand(100, 999);
   $fileName = implode(".", $tokens);
 } elseif (!empty($_FILES)) {
 	$fileName = $_FILES["file"]["name"];
@@ -90,7 +90,7 @@ if (isset($_REQUEST["name"])) {
   $fileName = preg_replace('/_+/', '_', $fileName);
   $fileName = strtolower($fileName);
   $tokens = explode(".", $fileName);
-  $tokens[sizeof($tokens)-2] = $tokens[sizeof($tokens)-2] . "_" . rand(100, 999);
+  // $tokens[sizeof($tokens)-2] = $tokens[sizeof($tokens)-2] . "_" . rand(100, 999);
   $fileName = implode(".", $tokens);
 } else {
 	$fileName = uniqid("file_");
@@ -203,6 +203,6 @@ $rtn->success = i18n(array(
   'en' => 'File upload success.',
   'zh' => '文件上传成功'
 ));
-$rtn->filepath = str_replace(CACHE_DIR . DS , '', $filePath);
+$rtn->filepath = str_replace(WEBROOT . DS , '', $filePath);
 echo json_encode($rtn);
 exit;

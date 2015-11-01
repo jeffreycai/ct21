@@ -5,6 +5,13 @@ if (is_null($object)) {
   HTML::forward('core/404');
 }
 
+// bootstrap field widgets
+<?php foreach ($form_fields as $field => $settings):
+if (method_exists($settings['widget_class'], 'bootstrap')): ?>
+<?php echo $settings['widget_class'] ?>::bootstrap('<?php echo $field ?>');
+<?php endif;
+endforeach; ?>
+
 // handle form submission
 if (isset($_POST['submit'])) {
   $error_flag = false;
