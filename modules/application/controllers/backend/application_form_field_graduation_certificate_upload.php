@@ -29,14 +29,14 @@ header("Pragma: no-cache");
 $rtn = new stdClass();
 ///// validation
 
-if (!User::getInstance()->isLogin()) {
-  $rtn->error = i18n(array(
-    'en' => 'Authorisation required.',
-    'zh' => '抱歉，您没有权限进行此操作'
-  ));
-  echo json_encode($rtn);
-  exit;
-}
+//if (!User::getInstance()->isLogin()) {
+//  $rtn->error = i18n(array(
+//    'en' => 'Authorisation required.',
+//    'zh' => '抱歉，您没有权限进行此操作'
+//  ));
+//  echo json_encode($rtn);
+//  exit;
+//}
 
 // we check if the target folder exists and writable
 if (!is_writable(WEBROOT . DS . 'files/application')) {

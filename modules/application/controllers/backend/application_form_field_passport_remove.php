@@ -3,11 +3,11 @@
 require_once __DIR__ .'/../../../../bootstrap.php';
 
 $rtn = new stdClass();
-if (!User::getInstance()->isLogin()) {
-  $rtn->error = i18n(array('en' => 'Authorisation required.', 'zh' => '抱歉，您没有权限进行此操作'));
-  echo json_encode($rtn);
-  exit;
-}
+//if (!User::getInstance()->isLogin()) {
+//  $rtn->error = i18n(array('en' => 'Authorisation required.', 'zh' => '抱歉，您没有权限进行此操作'));
+//  echo json_encode($rtn);
+//  exit;
+//}
 
 $fid = strip_tags($_POST['fid']);
 $furi = WEBROOT . DS . strip_tags($_POST['furi']);

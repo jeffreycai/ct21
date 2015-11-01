@@ -3,11 +3,11 @@
 require_once __DIR__ .'/../../../../bootstrap.php';
 $rtn = new stdClass();
 
-if (!User::getInstance()->isLogin()) {
-  $rtn->error = i18n(array('en' => 'Authorisation required.', 'zh' => '抱歉，您没有权限进行此操作'));
-  echo json_encode($rtn);
-  exit;
-}
+//if (!User::getInstance()->isLogin()) {
+//  $rtn->error = i18n(array('en' => 'Authorisation required.', 'zh' => '抱歉，您没有权限进行此操作'));
+//  echo json_encode($rtn);
+//  exit;
+//}
 
 $upload_dir = "files/application";
 
