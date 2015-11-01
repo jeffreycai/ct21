@@ -6,7 +6,7 @@
           <h1 class="entry-title">Apply your course</h1>
 <?php echo Message::renderMessages() ?>
           
-<form class="form-horizontal" role="form" method="POST" action="<?php echo uri('admin/application/create') ?>">
+<form class="form-horizontal" role="form" method="POST" action="<?php echo uri('apply-form', false) ?>">
   
 <div class='form-group field-full-width'>
   <label class='col-sm-2 control-label' for='name'>Name <span style="color: rgb(185,2,0); font-weight: bold;">*</span></label>
