@@ -90,25 +90,50 @@ application:
           required: 1
           wysiwyg: 0
       passport:
-        widget: text
+        widget: plupfile
         widget_conf:
           required: 0
+          upload_dir: files/application
+          # max_file_size in mb
+          max_file_size: 1
+          max_file_number: 10
+          extensions: jpg,png,gif,zip,doc,docx,pdf
       graduation_certificate:
-        widget: text
+        widget: plupfile
         widget_conf:
           required: 0
+          upload_dir: files/application
+          # max_file_size in mb
+          max_file_size: 1
+          max_file_number: 10
+          extensions: jpg,png,gif,zip,doc,docx,pdf
       degree_certificate:
-        widget: text
+        widget: plupfile
         widget_conf:
           required: 0
+          upload_dir: files/application
+          # max_file_size in mb
+          max_file_size: 1
+          max_file_number: 10
+          extensions: jpg,png,gif,zip,doc,docx,pdf
       academic_transcripts:
-        widget: text
+        widget: plupfile
         widget_conf:
           required: 0
+          upload_dir: files/application
+          # max_file_size in mb
+          max_file_size: 1
+          max_file_number: 10
+          extensions: jpg,png,gif,zip,doc,docx,pdf
       ielts_transcripts:
-        widget: text
+        widget: plupfile
         widget_conf:
           required: 0
+          upload_dir: files/application
+          # max_file_size in mb
+          max_file_size: 1
+          max_file_number: 10
+          extensions: jpg,png,gif,zip,doc,docx,pdf
           
     names:
       en: Application

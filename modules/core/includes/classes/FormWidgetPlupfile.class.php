@@ -192,9 +192,9 @@ function checkMaxItemReached(max, textarea, addButton, uploader) {
     $rtn = 
 '
     <div class="form-group">
-      <label for="'.$this->name.'" class="col-sm-2 control-label">'.$this->name.' <span style="color: rgb(185,2,0); font-weight: bold;">*</span></label>
+      <label for="'.$this->name.'" class="col-sm-2 control-label">'.$this->name.' '.($this->required ? '<span style="color: rgb(185,2,0); font-weight: bold;">*</span>' : '').'</label>
       <div class="col-sm-10">
-        <textarea required="" name="'.$this->name.'" id="'.$this->name.'" rows="5" class="form-control">[[[ echo isset($_POST["'.$this->name.'"]) ? htmlentities($_POST["'.$this->name.'"]) : htmlentities($object->get'.  format_as_class_name($this->name).'()); ]]]</textarea>
+        <textarea'.($this->required ? ' required=""' : '').' name="'.$this->name.'" id="'.$this->name.'" rows="5" class="form-control">[[[ echo isset($_POST["'.$this->name.'"]) ? htmlentities($_POST["'.$this->name.'"]) : htmlentities($object->get'.  format_as_class_name($this->name).'()); ]]]</textarea>
 
         <div id="'.$this->name.'_uploader" class="uploader" style="display: none;">
             <p>Your browser doesn\'t have Flash, Silverlight or HTML5 support.</p>
@@ -328,6 +328,9 @@ $(function() {
     // check file extension
     foreach ($files as $file) {
       $file = trim($file);
+      if (sizeof($files) == 1 && $file == "") {
+        break;
+      }
       $tokens = explode(".", $file);
       $extension = array_pop($tokens);
       if (!in_array(strtolower($extension), array('.$this->extensions_quoted.'))) {

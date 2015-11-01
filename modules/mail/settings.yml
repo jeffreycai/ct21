@@ -3,7 +3,7 @@ mail:
   admin:
     to: george@ct21.com.au
 #    to: jeffreycaizhenyuan@gmail.com
-    from: jeffreycaizhenyuan@gmail.com
+    from: george@ct21.com.au
     mailer: smtp
     SMTPSecure: tls
     host: smtp.mandrillapp.com

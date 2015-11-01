@@ -1,6 +1,12 @@
 <?php
 /** handle submission **/
 
+// bootstrap field widgets
+FormWidgetPlupfile::bootstrap('graduation_certificate');
+FormWidgetPlupfile::bootstrap('degree_certificate');
+FormWidgetPlupfile::bootstrap('academic_transcripts');
+FormWidgetPlupfile::bootstrap('ielts_transcripts');
+
 $html = new HTML();
 $html->renderOut('site/components/html_header', array(
     'title' => 'Apply for a course',

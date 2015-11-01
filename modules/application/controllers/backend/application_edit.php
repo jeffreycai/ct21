@@ -6,6 +6,13 @@ if (is_null($object)) {
   HTML::forward('core/404');
 }
 
+// bootstrap field widgets
+FormWidgetPlupfile::bootstrap('passport');
+FormWidgetPlupfile::bootstrap('graduation_certificate');
+FormWidgetPlupfile::bootstrap('degree_certificate');
+FormWidgetPlupfile::bootstrap('academic_transcripts');
+FormWidgetPlupfile::bootstrap('ielts_transcripts');
+
 // handle form submission
 if (isset($_POST['submit'])) {
   $error_flag = false;
@@ -78,15 +85,165 @@ if (isset($_POST['submit'])) {
   }
   
   // validation for $passport
-  $passport = isset($_POST["passport"]) ? strip_tags($_POST["passport"]) : null;  
+  $passport = isset($_POST["passport"]) ? strip_tags(trim($_POST["passport"])) : null;
+  // check upload_dir
+  if (!is_dir(WEBROOT . DS . "files/application")) {
+    mkdir(WEBROOT . DS . "files/application");
+  }
+  if (!is_writable(WEBROOT . DS . "files/application")) {
+    $error_flag = true;
+    Message::register(new Message(Message::DANGER, i18n(array("en" => "Upload dir is not writable.", "zh" => "上传文件夹不可写"))));
+  } else {
+    $files = explode("\n", trim($passport));
+    // check max_file_number
+    if (sizeof($files) > 10) {
+      Message::register(new Message(Message::DANGER, i18n(array("en" => "Max file allowed to be uploed is 10. Please reduce uploaed files.", "zh" => "您最多可以上传10个文件，请减少上传的文件数量"))));
+      $error_flag = true;
+    }
+    // check file extension
+    foreach ($files as $file) {
+      $file = trim($file);
+      if (sizeof($files) == 1 && $file == "") {
+        break;
+      }
+      $tokens = explode(".", $file);
+      $extension = array_pop($tokens);
+      if (!in_array(strtolower($extension), array('jpg','png','gif','zip','doc','docx','pdf'))) {
+        Message::register(new Message(Message::DANGER, i18n(array("en" => "Only file with extension jpg,png,gif,zip,doc,docx,pdf is allowed. Please restrict your files with these types.", "zh" => "上传文件仅支持jpg,png,gif,zip,doc,docx,pdf，请检查您的上传文件"))));
+        $error_flag = true;
+        break;
+      }
+    }
+  }
+  
   // validation for $graduation_certificate
-  $graduation_certificate = isset($_POST["graduation_certificate"]) ? strip_tags($_POST["graduation_certificate"]) : null;  
+  $graduation_certificate = isset($_POST["graduation_certificate"]) ? strip_tags(trim($_POST["graduation_certificate"])) : null;
+  // check upload_dir
+  if (!is_dir(WEBROOT . DS . "files/application")) {
+    mkdir(WEBROOT . DS . "files/application");
+  }
+  if (!is_writable(WEBROOT . DS . "files/application")) {
+    $error_flag = true;
+    Message::register(new Message(Message::DANGER, i18n(array("en" => "Upload dir is not writable.", "zh" => "上传文件夹不可写"))));
+  } else {
+    $files = explode("\n", trim($graduation_certificate));
+    // check max_file_number
+    if (sizeof($files) > 10) {
+      Message::register(new Message(Message::DANGER, i18n(array("en" => "Max file allowed to be uploed is 10. Please reduce uploaed files.", "zh" => "您最多可以上传10个文件，请减少上传的文件数量"))));
+      $error_flag = true;
+    }
+    // check file extension
+    foreach ($files as $file) {
+      $file = trim($file);
+      if (sizeof($files) == 1 && $file == "") {
+        break;
+      }
+      $tokens = explode(".", $file);
+      $extension = array_pop($tokens);
+      if (!in_array(strtolower($extension), array('jpg','png','gif','zip','doc','docx','pdf'))) {
+        Message::register(new Message(Message::DANGER, i18n(array("en" => "Only file with extension jpg,png,gif,zip,doc,docx,pdf is allowed. Please restrict your files with these types.", "zh" => "上传文件仅支持jpg,png,gif,zip,doc,docx,pdf，请检查您的上传文件"))));
+        $error_flag = true;
+        break;
+      }
+    }
+  }
+  
   // validation for $degree_certificate
-  $degree_certificate = isset($_POST["degree_certificate"]) ? strip_tags($_POST["degree_certificate"]) : null;  
+  $degree_certificate = isset($_POST["degree_certificate"]) ? strip_tags(trim($_POST["degree_certificate"])) : null;
+  // check upload_dir
+  if (!is_dir(WEBROOT . DS . "files/application")) {
+    mkdir(WEBROOT . DS . "files/application");
+  }
+  if (!is_writable(WEBROOT . DS . "files/application")) {
+    $error_flag = true;
+    Message::register(new Message(Message::DANGER, i18n(array("en" => "Upload dir is not writable.", "zh" => "上传文件夹不可写"))));
+  } else {
+    $files = explode("\n", trim($degree_certificate));
+    // check max_file_number
+    if (sizeof($files) > 10) {
+      Message::register(new Message(Message::DANGER, i18n(array("en" => "Max file allowed to be uploed is 10. Please reduce uploaed files.", "zh" => "您最多可以上传10个文件，请减少上传的文件数量"))));
+      $error_flag = true;
+    }
+    // check file extension
+    foreach ($files as $file) {
+      $file = trim($file);
+      if (sizeof($files) == 1 && $file == "") {
+        break;
+      }
+      $tokens = explode(".", $file);
+      $extension = array_pop($tokens);
+      if (!in_array(strtolower($extension), array('jpg','png','gif','zip','doc','docx','pdf'))) {
+        Message::register(new Message(Message::DANGER, i18n(array("en" => "Only file with extension jpg,png,gif,zip,doc,docx,pdf is allowed. Please restrict your files with these types.", "zh" => "上传文件仅支持jpg,png,gif,zip,doc,docx,pdf，请检查您的上传文件"))));
+        $error_flag = true;
+        break;
+      }
+    }
+  }
+  
   // validation for $academic_transcripts
-  $academic_transcripts = isset($_POST["academic_transcripts"]) ? strip_tags($_POST["academic_transcripts"]) : null;  
+  $academic_transcripts = isset($_POST["academic_transcripts"]) ? strip_tags(trim($_POST["academic_transcripts"])) : null;
+  // check upload_dir
+  if (!is_dir(WEBROOT . DS . "files/application")) {
+    mkdir(WEBROOT . DS . "files/application");
+  }
+  if (!is_writable(WEBROOT . DS . "files/application")) {
+    $error_flag = true;
+    Message::register(new Message(Message::DANGER, i18n(array("en" => "Upload dir is not writable.", "zh" => "上传文件夹不可写"))));
+  } else {
+    $files = explode("\n", trim($academic_transcripts));
+    // check max_file_number
+    if (sizeof($files) > 10) {
+      Message::register(new Message(Message::DANGER, i18n(array("en" => "Max file allowed to be uploed is 10. Please reduce uploaed files.", "zh" => "您最多可以上传10个文件，请减少上传的文件数量"))));
+      $error_flag = true;
+    }
+    // check file extension
+    foreach ($files as $file) {
+      $file = trim($file);
+      if (sizeof($files) == 1 && $file == "") {
+        break;
+      }
+      $tokens = explode(".", $file);
+      $extension = array_pop($tokens);
+      if (!in_array(strtolower($extension), array('jpg','png','gif','zip','doc','docx','pdf'))) {
+        Message::register(new Message(Message::DANGER, i18n(array("en" => "Only file with extension jpg,png,gif,zip,doc,docx,pdf is allowed. Please restrict your files with these types.", "zh" => "上传文件仅支持jpg,png,gif,zip,doc,docx,pdf，请检查您的上传文件"))));
+        $error_flag = true;
+        break;
+      }
+    }
+  }
+  
   // validation for $ielts_transcripts
-  $ielts_transcripts = isset($_POST["ielts_transcripts"]) ? strip_tags($_POST["ielts_transcripts"]) : null;  /// proceed submission
+  $ielts_transcripts = isset($_POST["ielts_transcripts"]) ? strip_tags(trim($_POST["ielts_transcripts"])) : null;
+  // check upload_dir
+  if (!is_dir(WEBROOT . DS . "files/application")) {
+    mkdir(WEBROOT . DS . "files/application");
+  }
+  if (!is_writable(WEBROOT . DS . "files/application")) {
+    $error_flag = true;
+    Message::register(new Message(Message::DANGER, i18n(array("en" => "Upload dir is not writable.", "zh" => "上传文件夹不可写"))));
+  } else {
+    $files = explode("\n", trim($ielts_transcripts));
+    // check max_file_number
+    if (sizeof($files) > 10) {
+      Message::register(new Message(Message::DANGER, i18n(array("en" => "Max file allowed to be uploed is 10. Please reduce uploaed files.", "zh" => "您最多可以上传10个文件，请减少上传的文件数量"))));
+      $error_flag = true;
+    }
+    // check file extension
+    foreach ($files as $file) {
+      $file = trim($file);
+      if (sizeof($files) == 1 && $file == "") {
+        break;
+      }
+      $tokens = explode(".", $file);
+      $extension = array_pop($tokens);
+      if (!in_array(strtolower($extension), array('jpg','png','gif','zip','doc','docx','pdf'))) {
+        Message::register(new Message(Message::DANGER, i18n(array("en" => "Only file with extension jpg,png,gif,zip,doc,docx,pdf is allowed. Please restrict your files with these types.", "zh" => "上传文件仅支持jpg,png,gif,zip,doc,docx,pdf，请检查您的上传文件"))));
+        $error_flag = true;
+        break;
+      }
+    }
+  }
+  /// proceed submission
   
   // proceed for $name
   $object->setName($name);
@@ -136,19 +293,84 @@ if (isset($_POST['submit'])) {
   $object->setComment($comment);
   
   // proceed for $passport
-  $object->setPassport($passport);
+  $files = explode("\n", trim($passport));
+  $rtn = array();
+  foreach ($files as $file) {
+    $file = trim($file);
+    // for cache file, we move it to its proper location 
+    if (strpos($file, str_replace(WEBROOT . DS, "", CACHE_DIR)) === 0) {
+      $oldname = WEBROOT . DS . $file;
+      $newname = WEBROOT . DS . "files/application" . str_replace(CACHE_DIR, "", WEBROOT . DS . $file);
+      rename($oldname, $newname);
+      $file = str_replace(WEBROOT . DS, "", $newname);
+    }
+    $rtn[] = $file;
+  }
+  $object->setPassport(implode("\n", $rtn));
   
   // proceed for $graduation_certificate
-  $object->setGraduationCertificate($graduation_certificate);
+  $files = explode("\n", trim($graduation_certificate));
+  $rtn = array();
+  foreach ($files as $file) {
+    $file = trim($file);
+    // for cache file, we move it to its proper location 
+    if (strpos($file, str_replace(WEBROOT . DS, "", CACHE_DIR)) === 0) {
+      $oldname = WEBROOT . DS . $file;
+      $newname = WEBROOT . DS . "files/application" . str_replace(CACHE_DIR, "", WEBROOT . DS . $file);
+      rename($oldname, $newname);
+      $file = str_replace(WEBROOT . DS, "", $newname);
+    }
+    $rtn[] = $file;
+  }
+  $object->setGraduationCertificate(implode("\n", $rtn));
   
   // proceed for $degree_certificate
-  $object->setDegreeCertificate($degree_certificate);
+  $files = explode("\n", trim($degree_certificate));
+  $rtn = array();
+  foreach ($files as $file) {
+    $file = trim($file);
+    // for cache file, we move it to its proper location 
+    if (strpos($file, str_replace(WEBROOT . DS, "", CACHE_DIR)) === 0) {
+      $oldname = WEBROOT . DS . $file;
+      $newname = WEBROOT . DS . "files/application" . str_replace(CACHE_DIR, "", WEBROOT . DS . $file);
+      rename($oldname, $newname);
+      $file = str_replace(WEBROOT . DS, "", $newname);
+    }
+    $rtn[] = $file;
+  }
+  $object->setDegreeCertificate(implode("\n", $rtn));
   
   // proceed for $academic_transcripts
-  $object->setAcademicTranscripts($academic_transcripts);
+  $files = explode("\n", trim($academic_transcripts));
+  $rtn = array();
+  foreach ($files as $file) {
+    $file = trim($file);
+    // for cache file, we move it to its proper location 
+    if (strpos($file, str_replace(WEBROOT . DS, "", CACHE_DIR)) === 0) {
+      $oldname = WEBROOT . DS . $file;
+      $newname = WEBROOT . DS . "files/application" . str_replace(CACHE_DIR, "", WEBROOT . DS . $file);
+      rename($oldname, $newname);
+      $file = str_replace(WEBROOT . DS, "", $newname);
+    }
+    $rtn[] = $file;
+  }
+  $object->setAcademicTranscripts(implode("\n", $rtn));
   
   // proceed for $ielts_transcripts
-  $object->setIeltsTranscripts($ielts_transcripts);
+  $files = explode("\n", trim($ielts_transcripts));
+  $rtn = array();
+  foreach ($files as $file) {
+    $file = trim($file);
+    // for cache file, we move it to its proper location 
+    if (strpos($file, str_replace(WEBROOT . DS, "", CACHE_DIR)) === 0) {
+      $oldname = WEBROOT . DS . $file;
+      $newname = WEBROOT . DS . "files/application" . str_replace(CACHE_DIR, "", WEBROOT . DS . $file);
+      rename($oldname, $newname);
+      $file = str_replace(WEBROOT . DS, "", $newname);
+    }
+    $rtn[] = $file;
+  }
+  $object->setIeltsTranscripts(implode("\n", $rtn));
   if ($error_flag == false) {
     if ($object->save()) {
       Message::register(new Message(Message::SUCCESS, i18n(array("en" => "Record saved", "zh" => "记录保存成功"))));

@@ -18,54 +18,16 @@
 <table class="table table-striped table-bordered table-hover dataTable no-footer">
   <thead>
       <tr role="row">
-                <th>id</th>
                 <th>name</th>
-                <th>dob</th>
-                <th>address</th>
-                <th>postcode</th>
-                <th>phone</th>
-                <th>mobile</th>
-                <th>qq</th>
-                <th>email</th>
-                <th>education</th>
-                <th>graduate_institution</th>
-                <th>ielts</th>
-                <th>apply_country</th>
-                <th>apply_institution</th>
-                <th>apply_course</th>
-                <th>comment</th>
-                <th>passport</th>
-                <th>graduation_certificate</th>
-                <th>degree_certificate</th>
-                <th>academic_transcripts</th>
-                <th>ielts_transcripts</th>
+                <th>created_at</th>
                 <th>Actions</th>
       </tr>
   </thead>
   <tbody>
     <?php foreach ($objects as $object): ?>
     <tr>
-            <td><?php echo $object->getId() ?></td>
             <td><?php echo $object->getName() ?></td>
-            <td><?php echo $object->getDob() ?></td>
-            <td><?php echo $object->getAddress() ?></td>
-            <td><?php echo $object->getPostcode() ?></td>
-            <td><?php echo $object->getPhone() ?></td>
-            <td><?php echo $object->getMobile() ?></td>
-            <td><?php echo $object->getQq() ?></td>
-            <td><?php echo $object->getEmail() ?></td>
-            <td><?php echo $object->getEducation() ?></td>
-            <td><?php echo $object->getGraduateInstitution() ?></td>
-            <td><?php echo $object->getIelts() ?></td>
-            <td><?php echo $object->getApplyCountry() ?></td>
-            <td><?php echo $object->getApplyInstitution() ?></td>
-            <td><?php echo $object->getApplyCourse() ?></td>
-            <td><?php echo $object->getComment() ?></td>
-            <td><?php echo $object->getPassport() ?></td>
-            <td><?php echo $object->getGraduationCertificate() ?></td>
-            <td><?php echo $object->getDegreeCertificate() ?></td>
-            <td><?php echo $object->getAcademicTranscripts() ?></td>
-            <td><?php echo $object->getIeltsTranscripts() ?></td>
+            <td><?php echo date('Y-m-d', $object->getCreatedAt()) ?></td>
             <td>
         <div class="btn-group">
           <a class="btn btn-default btn-sm" href="<?php echo uri('admin/application/edit/' . $object->getId()); ?>"><i class="fa fa-edit"></i></a>

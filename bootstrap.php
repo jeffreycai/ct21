@@ -25,7 +25,7 @@ if (isset($custom_modules)) {
       'testimonial',
       'page',
       'menu',
-      'project'
+      'application'
   );
 
 }
