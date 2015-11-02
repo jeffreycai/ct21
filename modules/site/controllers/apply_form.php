@@ -362,7 +362,7 @@ if (isset($_POST['submit'])) {
   if ($error_flag == false) {
     if ($object->save()) {
       Message::register(new Message(Message::SUCCESS, i18n(array("en" => "Thanks for your application. We will come back to you as soon as possible.", "zh" => "记录保存成功"))));
-      sendemailAdmin('Apply for course', '<p>A new application for course has just been submitted: <br /><a href="http://en.websitesydney.net/admin/application/edit/'.$object->getId().'">http://en.websitesydney.net/admin/application/edit/'.$object->getId().'</a></p>');
+      sendemailAdmin('Apply for course', '<p>A new application for course has just been submitted: <br /><a href="http://en.ct21.com.au/admin/application/edit/'.$object->getId().'">http://en.ct21.com.au/admin/application/edit/'.$object->getId().'</a></p>');
       HTML::forwardBackToReferer();
     } else {
       Message::register(new Message(Message::DANGER, i18n(array("en" => "Record failed to save", "zh" => "记录保存失败"))));
