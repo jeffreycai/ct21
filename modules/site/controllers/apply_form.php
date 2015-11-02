@@ -3,7 +3,7 @@
 // handle form submission
 if (isset($_POST['submit'])) {
   $error_flag = false;
-
+  $object = new Application();
   /// validation
   
   // validation for $name
