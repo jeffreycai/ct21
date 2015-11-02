@@ -6,6 +6,22 @@ function load_library_phpmailer() {
 
 function sendemailAdmin($subject, $msg) {
   $settings = Vars::getSettings();
+
+
+
+
+// To send HTML mail, the Content-type header must be set
+$headers  = 'MIME-Version: 1.0' . "\r\n";
+$headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+// Additional headers
+//$headers .= 'To: ' . $settings['mail']['admin']['to'] . "\r\n";
+$headers .= 'From: admin@en.ct21.com.au' . "\r\n";
+// mail it
+mail($settings['mail']['admin']['to'], $subject, $msg, $headers);
+return;
+
+
+
   $username = $settings['mail']['admin']['username'];
   $password = $settings['mail']['admin']['password'];
   if (strpos($username, '@') == false) {
