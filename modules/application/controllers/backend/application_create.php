@@ -75,10 +75,10 @@ if (isset($_POST['submit'])) {
   $apply_course = isset($_POST["apply_course"]) ? strip_tags($_POST["apply_course"]) : null;  
   // validation for $comment
   $comment = isset($_POST["comment"]) ? $_POST["comment"] : null;
-  if (empty($comment)) {
-    Message::register(new Message(Message::DANGER, i18n(array("en" => "comment is required.", "zh" => "请填写comment"))));
-    $error_flag = true;
-  }
+//  if (empty($comment)) {
+//    Message::register(new Message(Message::DANGER, i18n(array("en" => "comment is required.", "zh" => "请填写comment"))));
+//    $error_flag = true;
+//  }
   
   // validation for $passport
   $passport = isset($_POST["passport"]) ? strip_tags(trim($_POST["passport"])) : null;

@@ -1,8 +1,8 @@
 mail:
   # conf for email sending to amdin
   admin:
-#    to: george@ct21.com.au
-    to: jeffreycaizhenyuan@gmail.com
+    to: george@ct21.com.au
+#    to: jeffreycaizhenyuan@gmail.com
     from: george@ct21.com.au
     mailer: smtp
     SMTPSecure: tls

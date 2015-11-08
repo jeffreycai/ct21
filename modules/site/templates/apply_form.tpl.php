@@ -124,9 +124,9 @@
 <div class='hr-line-dashed'></div>
   
 <div class='form-group field-full-width'>
-  <label class='col-sm-2 control-label' for='comment'>Comment <span style="color: rgb(185,2,0); font-weight: bold;">*</span></label>
+  <label class='col-sm-2 control-label' for='comment'>Comment </label>
   <div class='col-sm-10'>
-    <textarea class='form-control' rows='5' id='comment' name='comment' required><?php echo ($object->isNew() ? (isset($_POST['comment']) ? htmlentities($_POST['comment']) : '') : htmlentities($object->getComment())) ?></textarea>
+    <textarea class='form-control' rows='5' id='comment' name='comment'><?php echo ($object->isNew() ? (isset($_POST['comment']) ? htmlentities($_POST['comment']) : '') : htmlentities($object->getComment())) ?></textarea>
   </div>
 </div>
 <div class='hr-line-dashed'></div>

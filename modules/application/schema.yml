@@ -87,7 +87,7 @@ application:
       comment:
         widget: textarea
         widget_conf:
-          required: 1
+          required: 0
           wysiwyg: 0
       passport:
         widget: plupfile
