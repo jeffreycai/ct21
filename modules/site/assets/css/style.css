@@ -214,6 +214,10 @@
 .highlight-list li a:hover {
   color: #149dd2;
 }
+.highlight-list ul {
+  margin-bottom: 0px;
+  list-style: none;
+}
 .widget a {
   color: inherit;
 }

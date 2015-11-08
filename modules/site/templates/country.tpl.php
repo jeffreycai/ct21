@@ -17,7 +17,23 @@
         <h2><?php echo $menu->getName() ?></h2>
         <ul class="highlight-list">
 <?php foreach ($menu->getRootItem(10)->getChildren() as $item): ?>
-          <li><i class="fa fa-book"></i> <a href="<?php echo strpos($item->getUri(), 'http') === 0 ? $item->getUri() : uri($item->getUri()) ?>"><?php echo $item->getName(); ?></a></li>
+          <li><i class="fa fa-book"></i> <a href="<?php echo strpos($item->getUri(), 'http') === 0 ? $item->getUri() : uri($item->getUri()) ?>"><?php echo $item->getName(); ?></a>
+          <?php if ($item->getChildren()): ?>
+            <ul>
+              <?php foreach ($item->getChildren() as $c): ?>
+              <li><i class="fa fa-book"></i> <a href="<?php echo strpos($c->getUri(), 'http') === 0 ? $c->getUri() : uri($c->getUri()) ?>"><?php echo $c->getName() ?></a>
+                <?php if ($c->getChildren()): ?>
+                <ul>
+                  <?php foreach ($c->getChildren() as $cc): ?>
+                  <li><i class="fa fa-book"></i> <a href="<?php echo strpos($cc->getUri(), 'http') === 0 ? $cc->getUri() : uri($cc->getUri()) ?>"><?php echo $cc->getName() ?></a></li>
+                  <?php endforeach; ?>
+                </ul>
+                <?php endif; ?>
+              </li>
+              <?php endforeach; ?>
+            </ul>
+          <?php endif; ?>
+          </li>
 <?php endforeach; ?>
         </ul>
       </div>
