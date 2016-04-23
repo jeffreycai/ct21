@@ -1,0 +1,1 @@
+rsync -a --delete --force --progress --exclude-from=exclude.txt -e "ssh" pdrupal@wwwct21comau.websitesydney.net:/home/pdrupal/webs/wwwct21comau/ ../

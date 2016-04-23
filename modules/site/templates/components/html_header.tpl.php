@@ -31,3 +31,4 @@
 
 <body class="<?php if (isset($body_class)) {echo $body_class; }?>">
 
+  <div style="position: fixed; bottom: 0px; right: 10px; background-color: #DA552F;color: #FFF;padding: 10px 20px;z-index: 999999;">此为Staging站,Prodtion url: en.ct21.com.au</div>
